@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>docsjs-editor multi switch demo</title>
+    <title>docsjs-editor multi switch demo (5 editors)</title>
     <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -71,8 +71,13 @@
         display: block;
       }
       #quill-editor,
-      #toast-editor {
+      #toast-editor,
+      #tiptap-editor {
         min-height: 220px;
+      }
+      .tiptap-host {
+        min-height: 220px;
+        outline: none;
       }
       #ck-editor,
       #tiny-editor {
@@ -98,7 +103,7 @@
       <div class="panel">
         <h1>docsjs-editor Multi-Editor Switch Demo</h1>
         <p class="meta">
-          Live switch between Quill, CKEditor5, TinyMCE and Toast UI while preserving content.
+          Live switch between Tiptap, Quill, CKEditor5, TinyMCE and Toast UI while preserving content.
         </p>
       </div>
 
@@ -110,6 +115,7 @@
           <button id="btn-read">Read Active Editor HTML</button>
           <label for="editor-type"><strong>Active Editor:</strong></label>
           <select id="editor-type">
+            <option value="tiptap">Tiptap</option>
             <option value="quill">Quill</option>
             <option value="ckeditor5">CKEditor5</option>
             <option value="tinymce">TinyMCE</option>
@@ -119,7 +125,8 @@
       </div>
 
       <div class="panel editor-host">
-        <div id="box-quill" class="editor-box active"><div id="quill-editor"></div></div>
+        <div id="box-tiptap" class="editor-box active"><div id="tiptap-editor" class="tiptap-host"></div></div>
+        <div id="box-quill" class="editor-box"><div id="quill-editor"></div></div>
         <div id="box-ckeditor5" class="editor-box"><div id="ck-editor"></div></div>
         <div id="box-tinymce" class="editor-box"><textarea id="tiny-editor"></textarea></div>
         <div id="box-toast-ui" class="editor-box"><div id="toast-editor"></div></div>
@@ -137,6 +144,8 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
     <script type="module">
+      import { Editor } from "https://esm.sh/@tiptap/core@2.12.0";
+      import StarterKit from "https://esm.sh/@tiptap/starter-kit@2.12.0";
       import { EditorSwitchboard } from "../dist/index.js";
 
       const source = document.getElementById("source");
@@ -146,12 +155,18 @@
       const btnRead = document.getElementById("btn-read");
 
       const boxes = {
+        tiptap: document.getElementById("box-tiptap"),
         quill: document.getElementById("box-quill"),
         ckeditor5: document.getElementById("box-ckeditor5"),
         tinymce: document.getElementById("box-tinymce"),
         "toast-ui": document.getElementById("box-toast-ui")
       };
 
+      const tiptap = new Editor({
+        element: document.getElementById("tiptap-editor"),
+        extensions: [StarterKit],
+        content: "<p>ready</p>"
+      });
       const quill = new window.Quill("#quill-editor", { theme: "snow" });
       const ckeditor5 = await window.ClassicEditor.create(document.getElementById("ck-editor"));
       await window.tinymce.init({
@@ -167,6 +182,7 @@
       });
 
       const instances = {
+        tiptap,
         quill,
         ckeditor5,
         tinymce,
@@ -174,7 +190,7 @@
       };
 
       const board = new EditorSwitchboard();
-      board.connect("quill", quill);
+      board.connect("tiptap", tiptap);
       await board.setHtml(source.value);
 
       function show(type) {
