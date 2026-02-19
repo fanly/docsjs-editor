@@ -78,6 +78,7 @@ unbind();
 ## Demo
 
 - 多编辑器运行时切换示例：`demos/multi-switch.html`
+- Tiptap + Quill 切换示例：`demos/tiptap-switch.html`
 - Demo 说明：`demos/README.md`
 
 ## 集成文档
@@ -99,6 +100,7 @@ unbind();
 npm install
 npm run verify
 npm run build
+npm run benchmark:switchboard
 ```
 
 ## 发布规则

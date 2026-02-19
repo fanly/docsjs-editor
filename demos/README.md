@@ -7,6 +7,7 @@ These demos show runtime switching between mainstream editors with a unified doc
 ## Available demos
 
 - `demos/multi-switch.html`: Quill + CKEditor5 + TinyMCE + Toast UI in one page
+- `demos/tiptap-switch.html`: Tiptap + Quill runtime switch
 
 ## Run locally
 
@@ -25,6 +26,7 @@ npx serve .
 3. Open:
 
 - `http://localhost:3000/demos/multi-switch.html`
+- `http://localhost:3000/demos/tiptap-switch.html`
 
 ## Notes
 

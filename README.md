@@ -82,6 +82,7 @@ unbind();
 ## Demos
 
 - Multi-editor runtime switch demo: `demos/multi-switch.html`
+- Tiptap + Quill switch demo: `demos/tiptap-switch.html`
 - Demo guide: `demos/README.md`
 
 ## Integration Docs
@@ -103,6 +104,7 @@ For docsjs ecosystem plugin pages, we keep one shared page architecture template
 npm install
 npm run verify
 npm run build
+npm run benchmark:switchboard
 ```
 
 ## Publishing
