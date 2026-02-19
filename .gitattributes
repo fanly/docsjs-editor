@@ -1,0 +1,2 @@
+eslint.config.mjs linguist-detectable=false
+scripts/benchmark-switchboard.mjs linguist-detectable=false
