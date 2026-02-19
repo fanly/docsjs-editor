@@ -144,3 +144,9 @@ npm publish --access public
 ## License
 
 MIT
+
+## Support This Project
+
+If this project saves your time, a small tip is appreciated.
+
+![Support docsjs](https://image.coding01.cn/Coding01%20%E8%B5%9E%E8%B5%8F%E7%A0%81.png)

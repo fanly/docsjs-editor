@@ -140,3 +140,9 @@ npm publish --access public
 ## License
 
 MIT
+
+## 打赏支持
+
+如果这个项目帮你节省了时间，欢迎打赏支持。
+
+![支持 docsjs](https://image.coding01.cn/Coding01%20%E8%B5%9E%E8%B5%8F%E7%A0%81.png)
