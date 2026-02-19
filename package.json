@@ -1,0 +1,62 @@
+{
+  "name": "@coding01/docsjs-editor",
+  "version": "0.1.0",
+  "description": "Multi-editor integration bridge for docsjs HTML snapshots and DOCX workflows",
+  "license": "MIT",
+  "author": "fanly <fanly@outlook.com>",
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src tests",
+    "lint:fix": "eslint src tests --fix",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
+  },
+  "keywords": [
+    "docsjs",
+    "editor",
+    "tiptap",
+    "quill",
+    "ckeditor",
+    "tinymce",
+    "toast-ui",
+    "wangEditor"
+  ],
+  "homepage": "https://docsjs.coding01.cn/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanly/docsjs-editor.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@coding01/docsjs": "^0.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.18.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0",
+    "vitest": "^3.2.4"
+  }
+}

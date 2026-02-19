@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>docsjs-editor | Multi-Editor Bridge</title>
+    <meta
+      name="description"
+      content="Integrate docsjs HTML snapshots with mainstream editors and switch providers at runtime with a unified API."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7fbff;
+        --bg-alt: #eef6ff;
+        --panel: #ffffff;
+        --ink: #122033;
+        --muted: #4b6178;
+        --line: #d7e6f7;
+        --brand: #0d74ce;
+        --brand-strong: #0b5ca2;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+      .container { width: min(1200px, 92vw); margin: 0 auto; }
+
+      .nav {
+        position: sticky; top: 0; z-index: 100;
+        background: rgba(247, 251, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+      .nav-left { display: flex; align-items: center; gap: 30px; }
+      .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 800; }
+      .logo-icon {
+        width: 30px; height: 30px; border-radius: 9px;
+        background: linear-gradient(145deg, var(--brand), #3f9ef0);
+        color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;
+      }
+      .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
+      .nav-links a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; }
+      .nav-links a:hover, .nav-links a.active { color: var(--brand); }
+
+      .lang-btn {
+        border: 1px solid var(--line); background: #fff; border-radius: 7px;
+        padding: 6px 12px; font-size: 13px; cursor: pointer;
+      }
+      .lang-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+      .hero {
+        text-align: center; padding: 82px 0 58px;
+        background: radial-gradient(circle at 12% 20%, #dcedff 0%, transparent 34%),
+          radial-gradient(circle at 86% 12%, #d6f4ff 0%, transparent 30%),
+          linear-gradient(180deg, #f2f8ff 0%, #f7fbff 100%);
+      }
+      .hero h1 { margin: 0 0 14px; font-size: clamp(38px, 6vw, 60px); line-height: 1.06; }
+      .hero h1 span { color: var(--brand); }
+      .hero p { max-width: 700px; margin: 0 auto 28px; color: var(--muted); font-size: clamp(16px, 2vw, 20px); }
+
+      .hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 20px; border-radius: 9px; font-weight: 700; font-size: 14px;
+        text-decoration: none; border: 1px solid var(--line);
+      }
+      .btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+      .btn-primary:hover { background: var(--brand-strong); }
+      .btn-secondary { background: #fff; color: var(--ink); }
+      .btn-secondary:hover { color: var(--brand); border-color: var(--brand); }
+
+      .stats-bar { display: flex; justify-content: center; gap: 34px; flex-wrap: wrap; padding-top: 24px; }
+      .stat-item { text-align: center; }
+      .stat-value { font-size: 26px; font-weight: 800; }
+      .stat-label { font-size: 13px; color: var(--muted); }
+
+      .features, .showcase, .api-section, .release, .sponsors { padding: 60px 0; }
+      .features, .release { background: var(--bg-alt); }
+      .features h2, .showcase h2, .api-section h2, .release h2, .sponsors h2 {
+        margin: 0 0 42px; text-align: center; font-size: 32px;
+      }
+
+      .feature-grid, .api-grid, .release-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
+      }
+      .card {
+        border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
+        padding: 22px;
+      }
+      .card h3 { margin: 0 0 8px; font-size: 18px; }
+      .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+      .code-window {
+        background: #141821; border-radius: 12px; overflow: hidden;
+        max-width: 860px; margin: 0 auto;
+      }
+      .code-header { display: flex; gap: 6px; padding: 12px 16px; background: #242c3a; }
+      .code-dot { width: 11px; height: 11px; border-radius: 50%; }
+      .code-dot:nth-child(1) { background: #ff5f56; }
+      .code-dot:nth-child(2) { background: #ffbd2e; }
+      .code-dot:nth-child(3) { background: #27ca40; }
+      .code-content { padding: 20px; overflow-x: auto; }
+      .code-content pre, .compare pre {
+        margin: 0; color: #dfe6ee; font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.7;
+      }
+
+      .compare { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .panel { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .panel-title { background: #edf5ff; border-bottom: 1px solid var(--line); padding: 10px 12px; font-size: 13px; font-weight: 700; }
+      .panel-body { background: #171d28; padding: 14px; }
+
+      .sponsors p { text-align: center; color: var(--muted); margin: 0 0 18px; }
+      .sponsor-logos { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .sponsor-logo {
+        border: 1px solid var(--line); border-radius: 999px; background: #fff;
+        padding: 8px 14px; font-size: 13px; color: var(--muted); font-weight: 700;
+      }
+
+      .footer { padding: 30px 0; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 14px; }
+      .footer a { color: var(--brand); text-decoration: none; }
+      .footer a:hover { text-decoration: underline; }
+
+      @media (max-width: 860px) {
+        .nav-links { display: none; }
+        .compare { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav-inner">
+        <div class="nav-left">
+          <a href="/" class="logo"><span class="logo-icon">E</span>docsjs-editor</a>
+          <ul class="nav-links">
+            <li><a href="#features" class="active">Features</a></li>
+            <li><a href="#showcase">Showcase</a></li>
+            <li><a href="#api">API</a></li>
+            <li><a href="https://github.com/fanly/docsjs-editor" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+        <div>
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">中文</button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="container">
+        <h1 data-i18n="heroTitle">One <span>Bridge</span> For Mainstream Editors</h1>
+        <p data-i18n="heroLead">Inject docsjs snapshots into Tiptap, Quill, CKEditor5, TinyMCE and more, then switch editor providers without rewriting your app flow.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://www.npmjs.com/package/@coding01/docsjs-editor" target="_blank" data-i18n="ctaNpm">Get Package</a>
+          <a class="btn btn-secondary" href="https://docsjs.coding01.cn/" target="_blank" data-i18n="ctaDocsjs">Use with docsjs</a>
+          <a class="btn btn-secondary" href="#showcase" data-i18n="ctaDemo">View Case</a>
+        </div>
+        <div class="stats-bar">
+          <div class="stat-item"><div class="stat-value">9</div><div class="stat-label" data-i18n="statEditors">Editors</div></div>
+          <div class="stat-item"><div class="stat-value">1</div><div class="stat-label" data-i18n="statApi">Unified API</div></div>
+          <div class="stat-item"><div class="stat-value">Runtime</div><div class="stat-label" data-i18n="statSwitch">Switch</div></div>
+          <div class="stat-item"><div class="stat-value">Open</div><div class="stat-label" data-i18n="statLicense">MIT</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <h2 data-i18n="featuresTitle">Why docsjs-editor?</h2>
+        <div class="feature-grid">
+          <article class="card">
+            <h3 data-i18n="f1Title">Mainstream Coverage</h3>
+            <p data-i18n="f1Desc">Built-in adapters for Tiptap, Quill, CKEditor5, TinyMCE, Toast UI, WangEditor and extensible hooks for Lexical/Slate/ProseMirror.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="f2Title">Switchboard Runtime</h3>
+            <p data-i18n="f2Desc">Switch editor providers in runtime while preserving current content and keeping business APIs stable.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="f3Title">docsjs Native Bridge</h3>
+            <p data-i18n="f3Desc">Bind docsjs events directly and pipe HTML snapshots into your target editor in one step.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="f4Title">Ecosystem Pairing</h3>
+            <p data-i18n="f4Desc">Combine with docsjs and docsjs-markdown to build full Word -> Editor -> Markdown workflows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="showcase" id="showcase">
+      <div class="container">
+        <h2 data-i18n="showcaseTitle">Complete Case: Left docsjs, Right active editor</h2>
+        <div class="code-window">
+          <div class="code-header"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+          <div class="code-content">
+            <pre>import { EditorSwitchboard, bindDocsjsChangeToEditor } from "@coding01/docsjs-editor";
+
+const switchboard = new EditorSwitchboard();
+const adapter = switchboard.connect("tiptap", tiptapEditor);
+bindDocsjsChangeToEditor(docsjsElement, adapter);
+
+await switchboard.switchTo("quill", quillEditor);</pre>
+          </div>
+        </div>
+
+        <div class="compare">
+          <div class="panel">
+            <div class="panel-title" data-i18n="leftTitle">Left: docsjs HTML snapshot</div>
+            <div class="panel-body"><pre>&lt;h1&gt;Quarter Plan&lt;/h1&gt;
+&lt;p&gt;Parser and editor pipeline are upgraded.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;DOCX fidelity import&lt;/li&gt;
+  &lt;li&gt;Editor runtime switch&lt;/li&gt;
+  &lt;li&gt;Markdown delivery&lt;/li&gt;
+&lt;/ul&gt;</pre></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title" data-i18n="rightTitle">Right: editor rendered content</div>
+            <div class="panel-body"><pre>[Tiptap / Quill / CKEditor5 view]
+
+Quarter Plan
+Parser and editor pipeline are upgraded.
+
+- DOCX fidelity import
+- Editor runtime switch
+- Markdown delivery</pre></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="api-section" id="api">
+      <div class="container">
+        <h2 data-i18n="apiTitle">API Reference</h2>
+        <div class="api-grid">
+          <div class="card"><h3 data-i18n="apiCore">Switchboard</h3><p><code>connect()</code> / <code>switchTo()</code> / <code>setHtml()</code> / <code>getHtml()</code></p></div>
+          <div class="card"><h3 data-i18n="apiBridge">docsjs Bridge</h3><p><code>bindDocsjsChangeToEditor()</code> / <code>importDocxToEditor()</code></p></div>
+          <div class="card"><h3 data-i18n="apiAdapters">Adapters</h3><p><code>createBuiltinAdapter()</code> with mainstream editor types</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="release" id="release">
+      <div class="container">
+        <h2 data-i18n="releaseTitle">Release Rules</h2>
+        <div class="release-grid">
+          <div class="card"><h3>CI</h3><p data-i18n="r1">Push to <code>main</code>: run verify quality gate.</p></div>
+          <div class="card"><h3>npm</h3><p data-i18n="r2">Push tag <code>v*.*.*</code>: publish npm package.</p></div>
+          <div class="card"><h3>Pages</h3><p data-i18n="r3">Update <code>docs/**</code> on main: deploy landing page.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sponsors">
+      <div class="container">
+        <h2 data-i18n="ecoTitle">docsjs Plugin Family</h2>
+        <p data-i18n="ecoDesc">Same information architecture, different themes. Reusable for future plugin pages.</p>
+        <div class="sponsor-logos">
+          <span class="sponsor-logo">@coding01/docsjs</span>
+          <span class="sponsor-logo">@coding01/docsjs-editor</span>
+          <span class="sponsor-logo">@coding01/docsjs-markdown</span>
+          <span class="sponsor-logo">Theme Switchable</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <p>
+          <a href="https://github.com/fanly/docsjs-editor">GitHub</a> ·
+          <a href="https://www.npmjs.com/package/@coding01/docsjs-editor">npm</a> ·
+          <a href="https://docsjs.coding01.cn/">docsjs</a>
+        </p>
+        <p>MIT License · docsjs-editor</p>
+      </div>
+    </footer>
+
+    <script>
+      const i18n = {
+        en: {
+          heroTitle: "One Bridge For Mainstream Editors",
+          heroLead: "Inject docsjs snapshots into Tiptap, Quill, CKEditor5, TinyMCE and more, then switch editor providers without rewriting your app flow.",
+          ctaNpm: "Get Package",
+          ctaDocsjs: "Use with docsjs",
+          ctaDemo: "View Case",
+          statEditors: "Editors",
+          statApi: "Unified API",
+          statSwitch: "Switch",
+          statLicense: "MIT",
+          featuresTitle: "Why docsjs-editor?",
+          f1Title: "Mainstream Coverage",
+          f1Desc: "Built-in adapters for Tiptap, Quill, CKEditor5, TinyMCE, Toast UI, WangEditor and extensible hooks for Lexical/Slate/ProseMirror.",
+          f2Title: "Switchboard Runtime",
+          f2Desc: "Switch editor providers in runtime while preserving current content and keeping business APIs stable.",
+          f3Title: "docsjs Native Bridge",
+          f3Desc: "Bind docsjs events directly and pipe HTML snapshots into your target editor in one step.",
+          f4Title: "Ecosystem Pairing",
+          f4Desc: "Combine with docsjs and docsjs-markdown to build full Word -> Editor -> Markdown workflows.",
+          showcaseTitle: "Complete Case: Left docsjs, Right active editor",
+          leftTitle: "Left: docsjs HTML snapshot",
+          rightTitle: "Right: editor rendered content",
+          apiTitle: "API Reference",
+          apiCore: "Switchboard",
+          apiBridge: "docsjs Bridge",
+          apiAdapters: "Adapters",
+          releaseTitle: "Release Rules",
+          r1: "Push to main: run verify quality gate.",
+          r2: "Push tag v*.*.*: publish npm package.",
+          r3: "Update docs/** on main: deploy landing page.",
+          ecoTitle: "docsjs Plugin Family",
+          ecoDesc: "Same information architecture, different themes. Reusable for future plugin pages."
+        },
+        zh: {
+          heroTitle: "一套桥接，接入主流编辑器",
+          heroLead: "将 docsjs 快照注入 Tiptap、Quill、CKEditor5、TinyMCE 等编辑器，并支持运行时切换而无需重写业务流程。",
+          ctaNpm: "查看包",
+          ctaDocsjs: "配套 docsjs",
+          ctaDemo: "查看案例",
+          statEditors: "编辑器",
+          statApi: "统一 API",
+          statSwitch: "可切换",
+          statLicense: "MIT",
+          featuresTitle: "为什么用 docsjs-editor？",
+          f1Title: "主流覆盖",
+          f1Desc: "内置 Tiptap、Quill、CKEditor5、TinyMCE、Toast UI、WangEditor 适配，并为 Lexical/Slate/ProseMirror 预留扩展 hooks。",
+          f2Title: "运行时切换",
+          f2Desc: "运行时切换编辑器提供方并保留当前内容，保证业务 API 稳定。",
+          f3Title: "docsjs 原生桥接",
+          f3Desc: "直接绑定 docsjs 事件，一步把 HTML 快照注入目标编辑器。",
+          f4Title: "生态联动",
+          f4Desc: "可与 docsjs、docsjs-markdown 联动，形成 Word -> Editor -> Markdown 全链路。",
+          showcaseTitle: "完整案例：左 docsjs，右编辑器呈现",
+          leftTitle: "左：docsjs HTML 快照",
+          rightTitle: "右：编辑器渲染结果",
+          apiTitle: "API 参考",
+          apiCore: "切换内核",
+          apiBridge: "docsjs 桥接",
+          apiAdapters: "适配器",
+          releaseTitle: "发布规则",
+          r1: "推送到 main：执行 verify 质量门。",
+          r2: "推送 tag v*.*.*：发布 npm 包。",
+          r3: "main 分支更新 docs/**：部署单页。",
+          ecoTitle: "docsjs 插件家族",
+          ecoDesc: "同一信息架构，不同主题视觉。可复用于后续插件页面。"
+        }
+      };
+
+      let currentLang = "en";
+      const langBtns = document.querySelectorAll(".lang-btn");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      function switchLang(lang) {
+        currentLang = lang;
+        langBtns.forEach((btn) => btn.classList.toggle("active", btn.dataset.lang === lang));
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n;
+          if (i18n[lang][key]) el.textContent = i18n[lang][key];
+        });
+      }
+
+      langBtns.forEach((btn) => btn.addEventListener("click", () => switchLang(btn.dataset.lang)));
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+          history.pushState(null, "", href);
+          target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      switchLang(currentLang);
+    </script>
+  </body>
+</html>
