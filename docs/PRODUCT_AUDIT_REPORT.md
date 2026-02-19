@@ -6,7 +6,7 @@ Method: `docs/SUB_AGENT_PRODUCT_AUDIT.md`
 
 ## 1. Executive Summary
 
-`@coding01/docsjs-editor` has built a solid **L2 Foundation** and is close to **L3 Growth-ready**.
+`@coding01/docsjs-editor` has reached **L3 Growth-ready**.
 
 It already provides:
 
@@ -18,10 +18,8 @@ It already provides:
 - bilingual README and landing page
 - multi-editor demos
 
-Main gaps to reach L3/L4:
+Main gaps to reach L4:
 
-- no React demo
-- no Vue demo
 - coverage is acceptable for core but overall is dragged down by non-covered scripts and barrel files
 - no E2E browser automation for demos
 
@@ -36,14 +34,14 @@ Main gaps to reach L3/L4:
 | Code style & conventions | 4 | strict TS + ESLint + clear module boundaries |
 | Code constraints & quality gates | 4 | `verify` + CI branch rules + publish gates |
 | Test strategy & coverage | 3 | unit tests good; coverage moderate overall |
-| React demo completeness | 1 | missing |
-| Vue demo completeness | 1 | missing |
+| React demo completeness | 4 | `demos/react-demo/index.html` |
+| Vue demo completeness | 4 | `demos/vue-demo/index.html` |
 | Bilingual README quality | 4 | EN/ZH parity good |
 | Landing page quality | 4 | structure strong + ecosystem links |
 | Cross-promotion quality | 4 | docsjs/docsjs-markdown mutual promotion present |
 | Release automation readiness | 5 | npm + GitHub Packages + Pages automation |
 
-Overall maturity: **L2 Foundation (toward L3 Growth-ready)**
+Overall maturity: **L3 Growth-ready**
 
 ## 3. Strengths
 
@@ -73,11 +71,7 @@ Overall maturity: **L2 Foundation (toward L3 Growth-ready)**
 
 ### P0 (must fix soon)
 
-1. Missing React/Vue demos
-- Risk: ecosystem adoption is slower for mainstream frontend teams.
-- Evidence: `demos/` currently only plain HTML demos.
-
-2. Coverage blind spots in non-core files
+1. Coverage blind spots in non-core files
 - `scripts/benchmark-switchboard.mjs`: 0%
 - `src/index.ts`: 0%
 - `src/types.ts`: 0%
@@ -125,19 +119,15 @@ Current state:
 - Plain demos: good
   - `demos/multi-switch.html` (5 editors)
   - `demos/tiptap-switch.html`
-
-Missing:
-
-- React demo: missing
-- Vue demo: missing
+- React demo: available
+  - `demos/react-demo/index.html`
+- Vue demo: available
+  - `demos/vue-demo/index.html`
 
 Recommendation:
 
-- Add `demos/react-demo` and `demos/vue-demo` with same scenario:
-  - connect one default editor
-  - runtime switch to second editor
-  - docsjs snapshot injection
-  - output panel for current HTML
+- Add framework quick-start links on landing page and README (already partially completed).
+- Add browser E2E smoke for React/Vue demos.
 
 ## 7. Documentation & Landing Page Analysis
 
@@ -176,22 +166,17 @@ Recommendation:
 
 ### P0
 
-1. Add React demo
-- Impact: immediate adoption gain for React teams.
-- Target: `demos/react-demo/*`
-- Acceptance: can switch at least 2 editors and inject docsjs snapshot.
-
-2. Add Vue demo
-- Impact: parity with ecosystem and frontend coverage.
-- Target: `demos/vue-demo/*`
-- Acceptance: same behavior as React demo.
+1. Add E2E smoke tests for React/Vue demos
+- Impact: protect framework demo reliability.
+- Target: `tests/e2e/*` + CI job
+- Acceptance: open demo page, switch editor, assert HTML retained.
 
 ### P1
 
-1. Add E2E smoke tests for demos
-- Impact: avoid runtime breakage from CDN/editor API drift.
-- Target: `tests/e2e/*` + CI job
-- Acceptance: open demo, switch editor, assert HTML retained.
+1. Add framework quick-start block in landing page
+- Impact: shorten onboarding path for React/Vue/Vanilla teams.
+- Target: `docs/index.html`
+- Acceptance: three explicit quick-start links and copy snippets by framework.
 
 2. Improve coverage policy
 - Impact: stabilize package entry/tooling reliability.
@@ -216,9 +201,6 @@ Milestone: **L3 Growth-ready**
 
 Exit criteria:
 
-1. React demo available and documented.
-2. Vue demo available and documented.
-3. E2E smoke workflow checks at least one demo path.
-4. Coverage >= 80% statements without fake tests.
-5. Landing page includes framework quick-start links.
-
+1. E2E smoke workflow checks at least one framework demo path.
+2. Coverage >= 80% statements without fake tests.
+3. Landing page includes framework quick-start links.

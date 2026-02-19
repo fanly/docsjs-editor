@@ -83,6 +83,8 @@ unbind();
 
 - Multi-editor runtime switch demo: `demos/multi-switch.html`
 - Tiptap + Quill switch demo: `demos/tiptap-switch.html`
+- React demo: `demos/react-demo/index.html`
+- Vue demo: `demos/vue-demo/index.html`
 - Demo guide: `demos/README.md`
 
 ## Integration Docs

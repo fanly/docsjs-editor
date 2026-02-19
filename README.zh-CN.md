@@ -79,6 +79,8 @@ unbind();
 
 - 多编辑器运行时切换示例：`demos/multi-switch.html`
 - Tiptap + Quill 切换示例：`demos/tiptap-switch.html`
+- React 示例：`demos/react-demo/index.html`
+- Vue 示例：`demos/vue-demo/index.html`
 - Demo 说明：`demos/README.md`
 
 ## 集成文档

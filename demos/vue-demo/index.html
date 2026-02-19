@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>docsjs-editor Vue Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" />
+    <style>
+      body { margin: 0; background: #f4f8fd; font-family: "Segoe UI", sans-serif; }
+      #app { max-width: 1100px; margin: 0 auto; padding: 18px; }
+      .card { background: #fff; border: 1px solid #d6e2ef; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+      textarea { width: 100%; min-height: 120px; border: 1px solid #c3d5e8; border-radius: 8px; padding: 10px; font-family: Consolas, monospace; }
+      button, select { border: 1px solid #c3d5e8; background: #fff; border-radius: 8px; padding: 8px 10px; }
+      button { cursor: pointer; }
+      .editor-host { min-height: 260px; border: 1px solid #d6e2ef; border-radius: 8px; padding: 8px; }
+      .editor-box { display: none; }
+      .editor-box.active { display: block; }
+      #vue-quill, #vue-ck { min-height: 220px; }
+      pre { margin: 0; border: 1px solid #d6e2ef; border-radius: 8px; background: #f8fbff; padding: 10px; overflow: auto; font-size: 12px; }
+      .muted { color: #536a81; font-size: 13px; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+    <script type="module">
+      import { EditorSwitchboard } from "../../dist/index.js";
+
+      const { createApp } = window.Vue;
+
+      createApp({
+        data() {
+          return {
+            source: "<h1>Vue Demo</h1><p>Switch editor with docsjs-editor in Vue.</p><ul><li>Quill adapter</li><li>CKEditor adapter</li><li>Stable API</li></ul>",
+            active: "quill",
+            output: "",
+            switchboard: new EditorSwitchboard(),
+            instances: {
+              quill: null,
+              ckeditor5: null
+            }
+          };
+        },
+        async mounted() {
+          this.instances.quill = new window.Quill("#vue-quill", { theme: "snow" });
+          this.instances.ckeditor5 = await window.ClassicEditor.create(document.getElementById("vue-ck"));
+          this.switchboard.connect("quill", this.instances.quill);
+          await this.switchboard.setHtml(this.source);
+        },
+        beforeUnmount() {
+          const ck = this.instances.ckeditor5;
+          if (ck && typeof ck.destroy === "function") {
+            ck.destroy();
+          }
+        },
+        methods: {
+          async switchEditor() {
+            await this.switchboard.switchTo(this.active, this.instances[this.active]);
+          },
+          async applySnapshot() {
+            await this.switchboard.setHtml(this.source);
+          },
+          async readHtml() {
+            this.output = await this.switchboard.getHtml();
+          }
+        },
+        template: `
+          <div>
+            <div class="card">
+              <h2 style="margin:0;">docsjs-editor Vue Demo</h2>
+              <p class="muted">Vue state + docsjs-editor switchboard on Quill and CKEditor5.</p>
+            </div>
+
+            <div class="card">
+              <label><strong>docsjs HTML Snapshot</strong></label>
+              <textarea v-model="source"></textarea>
+              <div class="row" style="margin-top:10px;">
+                <label><strong>Active editor:</strong></label>
+                <select v-model="active" @change="switchEditor">
+                  <option value="quill">Quill</option>
+                  <option value="ckeditor5">CKEditor5</option>
+                </select>
+                <button @click="applySnapshot">Apply Snapshot</button>
+                <button @click="readHtml">Read Active HTML</button>
+              </div>
+            </div>
+
+            <div class="card editor-host">
+              <div :class="['editor-box', { active: active === 'quill' }]"><div id="vue-quill"></div></div>
+              <div :class="['editor-box', { active: active === 'ckeditor5' }]"><div id="vue-ck"></div></div>
+            </div>
+
+            <div class="card">
+              <strong>Current Active HTML</strong>
+              <pre>{{ output }}</pre>
+            </div>
+          </div>
+        `
+      }).mount("#app");
+    </script>
+  </body>
+</html>
