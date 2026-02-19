@@ -14,6 +14,10 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
+    />
     <style>
       :root {
         --bg: #f7fbff;
@@ -112,7 +116,7 @@
       .code-dot:nth-child(2) { background: #ffbd2e; }
       .code-dot:nth-child(3) { background: #27ca40; }
       .code-content { padding: 20px; overflow-x: auto; }
-      .code-content pre, .compare pre {
+      .code-content pre, .code-content code, .compare pre, .compare code {
         margin: 0; color: #dfe6ee; font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.7;
       }
 
@@ -233,37 +237,37 @@
         <div class="code-window">
           <div class="code-header"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
           <div class="code-content">
-            <pre>import { EditorSwitchboard, bindDocsjsChangeToEditor } from "@coding01/docsjs-editor";
+            <pre><code class="language-ts">import { EditorSwitchboard, bindDocsjsChangeToEditor } from "@coding01/docsjs-editor";
 
 const switchboard = new EditorSwitchboard();
 const adapter = switchboard.connect("tiptap", tiptapEditor);
 bindDocsjsChangeToEditor(docsjsElement, adapter);
 
-await switchboard.switchTo("quill", quillEditor);</pre>
+await switchboard.switchTo("quill", quillEditor);</code></pre>
           </div>
         </div>
 
         <div class="compare">
           <div class="panel">
             <div class="panel-title" data-i18n="leftTitle">Left: docsjs HTML snapshot</div>
-            <div class="panel-body"><pre>&lt;h1&gt;Quarter Plan&lt;/h1&gt;
+            <div class="panel-body"><pre><code class="language-markup">&lt;h1&gt;Quarter Plan&lt;/h1&gt;
 &lt;p&gt;Parser and editor pipeline are upgraded.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;DOCX fidelity import&lt;/li&gt;
   &lt;li&gt;Editor runtime switch&lt;/li&gt;
   &lt;li&gt;Markdown delivery&lt;/li&gt;
-&lt;/ul&gt;</pre></div>
+&lt;/ul&gt;</code></pre></div>
           </div>
           <div class="panel">
             <div class="panel-title" data-i18n="rightTitle">Right: editor rendered content</div>
-            <div class="panel-body"><pre>[Tiptap / Quill / CKEditor5 view]
+            <div class="panel-body"><pre><code class="language-markdown">[Tiptap / Quill / CKEditor5 view]
 
 Quarter Plan
 Parser and editor pipeline are upgraded.
 
 - DOCX fidelity import
 - Editor runtime switch
-- Markdown delivery</pre></div>
+- Markdown delivery</code></pre></div>
           </div>
         </div>
       </div>
@@ -316,6 +320,12 @@ Parser and editor pipeline are upgraded.
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
     <script>
       const i18n = {
         en: {
@@ -450,6 +460,9 @@ Parser and editor pipeline are upgraded.
       });
 
       switchLang(currentLang);
+      if (window.Prism) {
+        window.Prism.highlightAll();
+      }
     </script>
   </body>
 </html>
