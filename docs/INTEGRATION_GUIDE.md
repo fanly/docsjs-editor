@@ -43,3 +43,13 @@ await importDocxToEditor(file, board.getCurrentAdapter());
 - Add adapter matrix tests for your selected editors
 - Verify list/table/heading behavior after each switch
 - Add fallback mapping for editor-specific unsupported nodes
+
+## 7) Compatibility report and fallback
+
+```ts
+import { buildCompatibilityReport, applyFallbackPolicy } from "@coding01/docsjs-editor";
+
+const report = buildCompatibilityReport(htmlSnapshot, "quill");
+const safeHtml = applyFallbackPolicy(htmlSnapshot, report);
+await board.setHtml(safeHtml);
+```

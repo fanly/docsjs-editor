@@ -27,6 +27,7 @@ This matrix describes practical integration coverage in `@coding01/docsjs-editor
 1. If you need fastest delivery: choose `quill` / `ckeditor5` / `tinymce` first.
 2. If you need deep schema control: use `tiptap` with schema-level policies.
 3. For Lexical/Slate/ProseMirror projects: keep editor-specific HTML bridge in host layer and plug into `docsjs-editor` as custom hooks.
+4. Use `buildCompatibilityReport` + `applyFallbackPolicy` before injection when your docsjs output contains complex nodes.
 
 ## Migration Strategy
 

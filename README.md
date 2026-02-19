@@ -76,6 +76,8 @@ unbind();
 - `importHtmlSnapshotToEditor(html, adapter)`
 - `importDocxToEditor(file, adapter, options)`
 - `bindDocsjsChangeToEditor(host, adapter)`
+- `buildCompatibilityReport(html, editorType)`
+- `applyFallbackPolicy(html, report)`
 
 ## Demos
 
