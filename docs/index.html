@@ -164,7 +164,7 @@
     <section class="hero">
       <div class="container">
         <h1 data-i18n="heroTitle">One <span>Bridge</span> For Mainstream Editors</h1>
-        <p data-i18n="heroLead">Inject docsjs snapshots into Tiptap, Quill, CKEditor5, TinyMCE and more, then switch editor providers without rewriting your app flow.</p>
+        <p data-i18n="heroLead">Run one canonical docsjs content stream across mainstream editors, switch providers at runtime, and keep business APIs unchanged.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="https://www.npmjs.com/package/@coding01/docsjs-editor" target="_blank" data-i18n="ctaNpm">Get Package</a>
           <a class="btn btn-secondary" href="https://docsjs.coding01.cn/" target="_blank" data-i18n="ctaDocsjs">Use with docsjs</a>
@@ -172,10 +172,10 @@
           <a class="btn btn-secondary" href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="ctaFiveDemo">Try 5-Editor Demo</a>
         </div>
         <div class="stats-bar">
-          <div class="stat-item"><div class="stat-value">9</div><div class="stat-label" data-i18n="statEditors">Editors</div></div>
-          <div class="stat-item"><div class="stat-value">1</div><div class="stat-label" data-i18n="statApi">Unified API</div></div>
-          <div class="stat-item"><div class="stat-value">Runtime</div><div class="stat-label" data-i18n="statSwitch">Switch</div></div>
-          <div class="stat-item"><div class="stat-value">Open</div><div class="stat-label" data-i18n="statLicense">MIT</div></div>
+          <div class="stat-item"><div class="stat-value">9</div><div class="stat-label" data-i18n="statEditors">Mainstream Editors</div></div>
+          <div class="stat-item"><div class="stat-value">1</div><div class="stat-label" data-i18n="statApi">Business API</div></div>
+          <div class="stat-item"><div class="stat-value">Runtime</div><div class="stat-label" data-i18n="statSwitch">Provider Switch</div></div>
+          <div class="stat-item"><div class="stat-value">MIT</div><div class="stat-label" data-i18n="statLicense">Open Source</div></div>
         </div>
       </div>
     </section>
@@ -186,15 +186,15 @@
         <div class="feature-grid">
           <article class="card">
             <h3 data-i18n="f1Title">Mainstream Coverage</h3>
-            <p data-i18n="f1Desc">Built-in adapters for Tiptap, Quill, CKEditor5, TinyMCE, Toast UI, WangEditor and extensible hooks for Lexical/Slate/ProseMirror.</p>
+            <p data-i18n="f1Desc">Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.</p>
           </article>
           <article class="card">
             <h3 data-i18n="f2Title">Switchboard Runtime</h3>
-            <p data-i18n="f2Desc">Switch editor providers in runtime while preserving current content and keeping business APIs stable.</p>
+            <p data-i18n="f2Desc">Switch editor providers at runtime while preserving content and avoiding integration rewrites.</p>
           </article>
           <article class="card">
             <h3 data-i18n="f3Title">docsjs Native Bridge</h3>
-            <p data-i18n="f3Desc">Bind docsjs events directly and pipe HTML snapshots into your target editor in one step.</p>
+            <p data-i18n="f3Desc">Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.</p>
           </article>
           <article class="card">
             <h3 data-i18n="f4Title">Ecosystem Pairing</h3>
@@ -202,7 +202,7 @@
           </article>
           <article class="card">
             <h3 data-i18n="f5Title">Demo & Matrix Ready</h3>
-            <p data-i18n="f5Desc">Use multi-switch demo and capability matrix to evaluate editor fit before production rollout.</p>
+            <p data-i18n="f5Desc">Use demos and capability matrix to choose editor stacks faster and reduce migration risk.</p>
           </article>
         </div>
       </div>
@@ -214,17 +214,17 @@
         <div class="api-grid">
           <div class="card">
             <h3 data-i18n="quickReactTitle">React</h3>
-            <p data-i18n="quickReactDesc">Two-editor runtime switch with docsjs snapshot injection.</p>
+            <p data-i18n="quickReactDesc">Runtime switch demo with one docsjs content source and two editor providers.</p>
             <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html" target="_blank" data-i18n="quickReactLink">Open React demo</a></p>
           </div>
           <div class="card">
             <h3 data-i18n="quickVueTitle">Vue</h3>
-            <p data-i18n="quickVueDesc">Vue state-driven editor switching on top of one switchboard.</p>
+            <p data-i18n="quickVueDesc">Vue state-driven provider switching with consistent content behavior.</p>
             <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html" target="_blank" data-i18n="quickVueLink">Open Vue demo</a></p>
           </div>
           <div class="card">
             <h3 data-i18n="quickVanillaTitle">Vanilla / CDN</h3>
-            <p data-i18n="quickVanillaDesc">5-editor panel for rapid evaluation and integration spikes.</p>
+            <p data-i18n="quickVanillaDesc">5-editor panel to benchmark integration effort before committing a stack.</p>
             <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="quickVanillaLink">Open 5-editor demo</a></p>
           </div>
         </div>
@@ -296,7 +296,7 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
 
     <section class="release" id="release">
       <div class="container">
-        <h2 data-i18n="releaseTitle">Release Rules</h2>
+        <h2 data-i18n="releaseTitle">Engineering Trust Signals</h2>
         <div class="release-grid">
           <div class="card"><h3>CI</h3><p data-i18n="r1">Push to <code>main</code>: run verify quality gate.</p></div>
           <div class="card"><h3>npm</h3><p data-i18n="r2">Push tag <code>v*.*.*</code>: publish npm package.</p></div>
@@ -307,8 +307,8 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
 
     <section class="sponsors">
       <div class="container">
-        <h2 data-i18n="ecoTitle">docsjs Plugin Family</h2>
-        <p data-i18n="ecoDesc">Same information architecture, different themes. Reusable for future plugin pages.</p>
+        <h2 data-i18n="ecoTitle">Recommended Ecosystem Path</h2>
+        <p data-i18n="ecoDesc">Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.</p>
         <p><a href="https://github.com/fanly/docsjs-editor/tree/main/demos" target="_blank" data-i18n="demoLink">Open demos</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="fiveDemoLink">Try 5-editor demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html" target="_blank" data-i18n="reactDemoLink">React demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html" target="_blank" data-i18n="vueDemoLink">Vue demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/docs/EDITOR_CAPABILITY_MATRIX.md" target="_blank" data-i18n="matrixLink">Open capability matrix</a></p>
         <div class="sponsor-logos">
           <span class="sponsor-logo">@coding01/docsjs</span>
@@ -340,36 +340,36 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
       const i18n = {
         en: {
           heroTitle: "One Bridge For Mainstream Editors",
-          heroLead: "Inject docsjs snapshots into Tiptap, Quill, CKEditor5, TinyMCE and more, then switch editor providers without rewriting your app flow.",
+          heroLead: "Run one canonical docsjs content stream across mainstream editors, switch providers at runtime, and keep business APIs unchanged.",
           ctaNpm: "Get Package",
           ctaDocsjs: "Use with docsjs",
           ctaDemo: "View Case",
           ctaFiveDemo: "Try 5-Editor Demo",
-          statEditors: "Editors",
-          statApi: "Unified API",
-          statSwitch: "Switch",
-          statLicense: "MIT",
+          statEditors: "Mainstream Editors",
+          statApi: "Business API",
+          statSwitch: "Provider Switch",
+          statLicense: "Open Source",
           quickTitle: "Framework Quick Start",
           quickReactTitle: "React",
-          quickReactDesc: "Two-editor runtime switch with docsjs snapshot injection.",
+          quickReactDesc: "Runtime switch demo with one docsjs content source and two editor providers.",
           quickReactLink: "Open React demo",
           quickVueTitle: "Vue",
-          quickVueDesc: "Vue state-driven editor switching on top of one switchboard.",
+          quickVueDesc: "Vue state-driven provider switching with consistent content behavior.",
           quickVueLink: "Open Vue demo",
           quickVanillaTitle: "Vanilla / CDN",
-          quickVanillaDesc: "5-editor panel for rapid evaluation and integration spikes.",
+          quickVanillaDesc: "5-editor panel to benchmark integration effort before committing a stack.",
           quickVanillaLink: "Open 5-editor demo",
           featuresTitle: "Why docsjs-editor?",
           f1Title: "Mainstream Coverage",
-          f1Desc: "Built-in adapters for Tiptap, Quill, CKEditor5, TinyMCE, Toast UI, WangEditor and extensible hooks for Lexical/Slate/ProseMirror.",
+          f1Desc: "Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.",
           f2Title: "Switchboard Runtime",
-          f2Desc: "Switch editor providers in runtime while preserving current content and keeping business APIs stable.",
+          f2Desc: "Switch editor providers at runtime while preserving content and avoiding integration rewrites.",
           f3Title: "docsjs Native Bridge",
-          f3Desc: "Bind docsjs events directly and pipe HTML snapshots into your target editor in one step.",
+          f3Desc: "Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.",
           f4Title: "Ecosystem Pairing",
           f4Desc: "Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.",
           f5Title: "Demo & Matrix Ready",
-          f5Desc: "Use multi-switch demo and capability matrix to evaluate editor fit before production rollout.",
+          f5Desc: "Use demos and capability matrix to choose editor stacks faster and reduce migration risk.",
           showcaseTitle: "Complete Case: One content, multiple editor adapters",
           leftTitle: "Left: docsjs HTML snapshot",
           rightTitle: "Right: same content after adapter switch",
@@ -377,12 +377,12 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           apiCore: "Switchboard",
           apiBridge: "docsjs Bridge",
           apiAdapters: "Adapters",
-          releaseTitle: "Release Rules",
+          releaseTitle: "Engineering Trust Signals",
           r1: "Push to main: run verify quality gate.",
           r2: "Push tag v*.*.*: publish npm package.",
           r3: "Update docs/** on main: deploy landing page.",
-          ecoTitle: "docsjs Plugin Family",
-          ecoDesc: "Same information architecture, different themes. Reusable for future plugin pages.",
+          ecoTitle: "Recommended Ecosystem Path",
+          ecoDesc: "Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.",
           demoLink: "Open demos",
           fiveDemoLink: "Try 5-editor demo",
           reactDemoLink: "React demo",
@@ -391,36 +391,36 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
         },
         zh: {
           heroTitle: "一套桥接，接入主流编辑器",
-          heroLead: "将 docsjs 快照注入 Tiptap、Quill、CKEditor5、TinyMCE 等编辑器，并支持运行时切换而无需重写业务流程。",
+          heroLead: "基于 docsjs 的同一内容源接入主流编辑器，在运行时切换提供方，同时保持业务 API 不变。",
           ctaNpm: "查看包",
           ctaDocsjs: "配套 docsjs",
           ctaDemo: "查看案例",
           ctaFiveDemo: "体验 5 编辑器 Demo",
-          statEditors: "编辑器",
-          statApi: "统一 API",
-          statSwitch: "可切换",
-          statLicense: "MIT",
+          statEditors: "主流编辑器",
+          statApi: "业务 API",
+          statSwitch: "提供方切换",
+          statLicense: "开源协议",
           quickTitle: "框架快速开始",
           quickReactTitle: "React",
-          quickReactDesc: "基于 docsjs 快照注入的双编辑器运行时切换示例。",
+          quickReactDesc: "同一 docsjs 内容源下的双编辑器运行时切换示例。",
           quickReactLink: "打开 React 示例",
           quickVueTitle: "Vue",
-          quickVueDesc: "基于同一 switchboard 的 Vue 状态驱动编辑器切换。",
+          quickVueDesc: "在 Vue 中通过状态驱动提供方切换并保持内容一致。",
           quickVueLink: "打开 Vue 示例",
           quickVanillaTitle: "Vanilla / CDN",
-          quickVanillaDesc: "5 编辑器面板，适合快速评估和集成验证。",
+          quickVanillaDesc: "5 编辑器面板，可先评估集成成本再决定技术栈。",
           quickVanillaLink: "打开 5 编辑器示例",
           featuresTitle: "为什么用 docsjs-editor？",
           f1Title: "主流覆盖",
-          f1Desc: "内置 Tiptap、Quill、CKEditor5、TinyMCE、Toast UI、WangEditor 适配，并为 Lexical/Slate/ProseMirror 预留扩展 hooks。",
+          f1Desc: "优先内置主流编辑器适配，并为 Lexical、Slate、ProseMirror 预留扩展能力。",
           f2Title: "运行时切换",
-          f2Desc: "运行时切换编辑器提供方并保留当前内容，保证业务 API 稳定。",
+          f2Desc: "运行时切换编辑器提供方并保留内容状态，避免重复集成改造。",
           f3Title: "docsjs 原生桥接",
-          f3Desc: "直接绑定 docsjs 事件，一步把 HTML 快照注入目标编辑器。",
+          f3Desc: "直接接入 docsjs 快照，让导入与编辑处理走同一条技术链路。",
           f4Title: "生态联动",
           f4Desc: "与 docsjs 组合形成规范化内容源，在多个编辑器提供方之间保持同一内容链路与一致性。",
           f5Title: "Demo 与能力矩阵",
-          f5Desc: "通过多编辑器切换 Demo 与能力矩阵，在生产落地前快速评估编辑器方案。",
+          f5Desc: "通过 Demo 与能力矩阵更快完成编辑器选型并降低迁移风险。",
           showcaseTitle: "完整案例：一份内容，多编辑器适配切换",
           leftTitle: "左：docsjs HTML 快照",
           rightTitle: "右：切换适配器后的同一内容结果",
@@ -428,12 +428,12 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           apiCore: "切换内核",
           apiBridge: "docsjs 桥接",
           apiAdapters: "适配器",
-          releaseTitle: "发布规则",
+          releaseTitle: "工程可信信号",
           r1: "推送到 main：执行 verify 质量门。",
           r2: "推送 tag v*.*.*：发布 npm 包。",
           r3: "main 分支更新 docs/**：部署单页。",
-          ecoTitle: "docsjs 插件家族",
-          ecoDesc: "同一信息架构，不同主题视觉。可复用于后续插件页面。",
+          ecoTitle: "推荐生态路径",
+          ecoDesc: "docsjs 负责高保真导入，docsjs-editor 负责运行时编辑器切换，docsjs-markdown 负责最终 Markdown 交付。",
           demoLink: "查看 demos",
           fiveDemoLink: "体验 5 编辑器 Demo",
           reactDemoLink: "React 示例",
