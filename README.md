@@ -67,6 +67,7 @@ unbind();
 
 ## API
 
+- Browser-safe entry (no docsjs parser export): `@coding01/docsjs-editor/browser`
 - `createBuiltinAdapter({ type, instance }, options)`
 - `new EditorSwitchboard()`
   - `connect(type, instance, options)`
@@ -107,6 +108,8 @@ npm install
 npm run verify
 npm run build
 npm run benchmark:switchboard
+npx playwright install chromium
+npm run test:e2e
 ```
 
 ## Publishing

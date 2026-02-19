@@ -34,5 +34,5 @@ npx serve .
 
 ## Notes
 
-- The demo imports local package build from `../dist/index.js`.
+- The demo imports local browser-safe build from `../dist/browser.js`.
 - CDN scripts are used for editor runtimes.

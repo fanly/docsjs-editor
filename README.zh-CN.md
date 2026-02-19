@@ -63,6 +63,7 @@ unbind();
 
 ## API
 
+- 浏览器安全入口（不导出 docsjs 解析桥接）：`@coding01/docsjs-editor/browser`
 - `createBuiltinAdapter({ type, instance }, options)`
 - `new EditorSwitchboard()`
   - `connect(type, instance, options)`
@@ -103,6 +104,8 @@ npm install
 npm run verify
 npm run build
 npm run benchmark:switchboard
+npx playwright install chromium
+npm run test:e2e
 ```
 
 ## 发布规则

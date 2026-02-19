@@ -21,7 +21,7 @@ It already provides:
 Main gaps to reach L4:
 
 - coverage is acceptable for core but overall is dragged down by non-covered scripts and barrel files
-- no E2E browser automation for demos
+- E2E is added as smoke level; needs deeper interaction assertions for enterprise reliability
 
 ## 2. Scorecard
 
@@ -79,8 +79,8 @@ Overall maturity: **L3 Growth-ready**
 
 ### P1 (important)
 
-1. No browser E2E checks for demo switching
-- Risk: CDN/runtime integration regressions are not caught by unit tests.
+1. E2E depth is still shallow
+- Risk: smoke can catch mount failures, but complex switch/regression paths may still be missed.
 
 2. Fallback policy currently tag-level and generic
 - Risk: complex enterprise HTML may need richer node-level transform policies.
@@ -166,10 +166,10 @@ Recommendation:
 
 ### P0
 
-1. Add E2E smoke tests for React/Vue demos
-- Impact: protect framework demo reliability.
-- Target: `tests/e2e/*` + CI job
-- Acceptance: open demo page, switch editor, assert HTML retained.
+1. Strengthen E2E assertions beyond smoke
+- Impact: improve production confidence for switch and content persistence.
+- Target: `tests/e2e/*`
+- Acceptance: include switch + apply + read roundtrip assertions on at least 2 demos.
 
 ### P1
 
