@@ -22,4 +22,19 @@ describe("compatibility report", () => {
     expect(out).not.toContain("<iframe");
     expect(out).toContain("[math content omitted for editor compatibility]");
   });
+
+  it("supports custom policy configuration", () => {
+    const html = "<p>a</p><table><tr><td>b</td></tr></table>";
+    const report = buildCompatibilityReport(html, "quill", {
+      editorOverrides: {
+        quill: {
+          table: "strip"
+        }
+      }
+    });
+    const out = applyFallbackPolicy(html, report);
+
+    expect(out).not.toContain("<table");
+    expect(out).not.toContain("[table omitted for editor compatibility]");
+  });
 });

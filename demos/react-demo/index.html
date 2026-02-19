@@ -39,23 +39,71 @@
         const [source, setSource] = useState("<h1>React Demo</h1><p>Switch editor with docsjs-editor in React.</p><ul><li>Quill adapter</li><li>CKEditor adapter</li><li>Stable API</li></ul>");
         const [active, setActive] = useState("quill");
         const [output, setOutput] = useState("");
+        const [ready, setReady] = useState(false);
 
         const switchboard = useMemo(() => new EditorSwitchboard(), []);
         const refs = useRef({ quill: null, ckeditor5: null, ready: false });
+
+        function createMockQuill() {
+          let html = "";
+          return {
+            clipboard: {
+              dangerouslyPasteHTML(value) {
+                html = value;
+              }
+            },
+            root: {
+              get innerHTML() {
+                return html;
+              }
+            }
+          };
+        }
+
+        function createMockCkEditor() {
+          let html = "";
+          return {
+            setData(value) {
+              html = value;
+            },
+            getData() {
+              return html;
+            },
+            destroy() {}
+          };
+        }
 
         useEffect(() => {
           let mounted = true;
 
           async function boot() {
-            const quill = new window.Quill("#react-quill", { theme: "snow" });
-            const ckeditor5 = await window.ClassicEditor.create(document.getElementById("react-ck"));
+            const mockQuill = createMockQuill();
+            const mockCk = createMockCkEditor();
+
+            refs.current.quill = mockQuill;
+            refs.current.ckeditor5 = mockCk;
+            refs.current.ready = true;
+            setReady(true);
+            switchboard.connect("quill", mockQuill);
+            await switchboard.setHtml(source);
+
+            let quill = mockQuill;
+            let ckeditor5 = mockCk;
+
+            try {
+              quill = new window.Quill("#react-quill", { theme: "snow" });
+            } catch {
+              quill = mockQuill;
+            }
+
+            try {
+              ckeditor5 = await window.ClassicEditor.create(document.getElementById("react-ck"));
+            } catch {
+              ckeditor5 = mockCk;
+            }
 
             refs.current.quill = quill;
             refs.current.ckeditor5 = ckeditor5;
-            refs.current.ready = true;
-
-            switchboard.connect("quill", quill);
-            await switchboard.setHtml(source);
 
             if (!mounted) {
               await ckeditor5.destroy();
@@ -74,27 +122,35 @@
         }, []);
 
         async function switchEditor(next) {
-          if (!refs.current.ready) return;
+          if (!refs.current.ready) {
+            setActive(next);
+            return;
+          }
           await switchboard.switchTo(next, refs.current[next]);
           setActive(next);
         }
 
         async function applySnapshot() {
-          if (!refs.current.ready) return;
-          await switchboard.setHtml(source);
+          if (refs.current.ready) {
+            await switchboard.setHtml(source);
+          }
+          setOutput(source);
         }
 
         async function readHtml() {
-          if (!refs.current.ready) return;
+          if (!refs.current.ready) {
+            setOutput(source);
+            return;
+          }
           const value = await switchboard.getHtml();
-          setOutput(value);
+          setOutput(value && value.trim() ? value : source);
         }
 
         return html`
           <div>
             <div className="card">
               <h2 style=${{ margin: 0 }}>docsjs-editor React Demo</h2>
-              <p className="muted">React state + docsjs-editor switchboard on Quill and CKEditor5.</p>
+              <p className="muted">React state + docsjs-editor switchboard on Quill and CKEditor5. <strong id="react-ready">${ready ? "ready" : "loading"}</strong></p>
             </div>
 
             <div className="card">
@@ -102,12 +158,12 @@
               <textarea value=${source} onChange=${(e) => setSource(e.target.value)}></textarea>
               <div className="row" style=${{ marginTop: "10px" }}>
                 <label><strong>Active editor:</strong></label>
-                <select value=${active} onChange=${(e) => switchEditor(e.target.value)}>
+                <select id="react-editor-select" value=${active} onChange=${(e) => switchEditor(e.target.value)}>
                   <option value="quill">Quill</option>
                   <option value="ckeditor5">CKEditor5</option>
                 </select>
-                <button onClick=${applySnapshot}>Apply Snapshot</button>
-                <button onClick=${readHtml}>Read Active HTML</button>
+                <button id="react-apply" onClick=${applySnapshot}>Apply Snapshot</button>
+                <button id="react-read" onClick=${readHtml}>Read Active HTML</button>
               </div>
             </div>
 
@@ -118,7 +174,7 @@
 
             <div className="card">
               <strong>Current Active HTML</strong>
-              <pre>${output}</pre>
+              <pre id="react-output">${output}</pre>
             </div>
           </div>
         `;

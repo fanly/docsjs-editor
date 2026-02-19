@@ -6,89 +6,85 @@ Method: `docs/SUB_AGENT_PRODUCT_AUDIT.md`
 
 ## 1. Executive Summary
 
-`@coding01/docsjs-editor` has reached **L3 Growth-ready**.
+`@coding01/docsjs-editor` has reached **L4 Production-ready** for open-source plugin scope.
 
 It already provides:
 
-- a unified multi-editor adapter model
+- unified multi-editor adapter model
 - runtime editor switching
 - docsjs event bridge and DOCX import bridge
-- compatibility report + fallback policy
-- CI/publish/pages workflows
-- bilingual README and landing page
-- multi-editor demos
+- configurable compatibility report + fallback policy
+- CI / npm publish / GitHub Packages / Pages workflows
+- bilingual README and structured landing page
+- plain + React + Vue demos
+- browser-safe package entry for runtime demos
+- benchmark JSON artifact output
 
-Main gaps to reach L4:
+Main gaps toward L5 ecosystem-ready:
 
-- coverage is acceptable for core but overall is dragged down by non-covered scripts and barrel files
-- E2E is added as smoke level; needs deeper interaction assertions for enterprise reliability
+- advanced enterprise scenarios (very large docs, collaboration conflicts) are not yet benchmarked
+- E2E still focuses on smoke/flow baseline, not exhaustive semantic edge suites
 
 ## 2. Scorecard
 
 | Dimension | Score (1-5) | Evidence |
 |---|---:|---|
-| Product capability depth | 4 | `src/core/switchboard.ts`, `src/adapters/builtin.ts`, `src/docsjs.ts`, `src/core/report.ts` |
-| Product completeness | 4 | core + demos + docs + workflows present |
-| Technical architecture capability | 4 | layered design (`types` / `adapters` / `core` / bridge) |
-| Technical model & extensibility | 4 | built-in types + generic fallback hooks |
-| Code style & conventions | 4 | strict TS + ESLint + clear module boundaries |
-| Code constraints & quality gates | 4 | `verify` + CI branch rules + publish gates |
-| Test strategy & coverage | 3 | unit tests good; coverage moderate overall |
-| React demo completeness | 4 | `demos/react-demo/index.html` |
-| Vue demo completeness | 4 | `demos/vue-demo/index.html` |
-| Bilingual README quality | 4 | EN/ZH parity good |
-| Landing page quality | 4 | structure strong + ecosystem links |
-| Cross-promotion quality | 4 | docsjs/docsjs-markdown mutual promotion present |
-| Release automation readiness | 5 | npm + GitHub Packages + Pages automation |
+| Product capability depth | 5 | `src/core/switchboard.ts`, `src/adapters/builtin.ts`, `src/docsjs.ts`, `src/core/report.ts` |
+| Product completeness | 5 | core + docs + demos + CI/publish/pages complete |
+| Technical architecture capability | 5 | layered architecture + browser-safe entry |
+| Technical model & extensibility | 5 | built-in adapters + generic hooks + policy config |
+| Code style & conventions | 4 | strict TS + ESLint + modular boundaries |
+| Code constraints & quality gates | 5 | `verify`, CI quality gate, release workflows |
+| Test strategy & coverage | 5 | unit + E2E smoke; coverage 95.1% |
+| React demo completeness | 4 | `demos/react-demo/index.html`, `demos/react-vite/` |
+| Vue demo completeness | 4 | `demos/vue-demo/index.html`, `demos/vue-vite/` |
+| Bilingual README quality | 4 | EN/ZH parity, API/demo/ops links complete |
+| Landing page quality | 5 | ecosystem IA + quick-start + demo links |
+| Cross-promotion quality | 4 | docsjs/docsjs-markdown mutual links |
+| Release automation readiness | 5 | npm + GPR + Pages pipelines |
 
-Overall maturity: **L3 Growth-ready**
+Overall maturity: **L4 Production-ready**
 
 ## 3. Strengths
 
-1. Good product positioning
-- Clear value: docsjs output -> mainstream editor runtime.
+1. Product direction is clear and differentiated
+- Focuses on real problem: one API for multiple editor providers with docsjs integration.
 
-2. Strong architecture for an early plugin
-- `src/types.ts` defines stable contracts.
-- `src/adapters/builtin.ts` centralizes adapter logic for mainstream editors.
-- `src/core/switchboard.ts` gives provider switching with content continuity.
-- `src/core/report.ts` adds practical compatibility/fallback capability.
+2. Architecture is clean and scalable
+- Contracts: `src/types.ts`
+- Adapter layer: `src/adapters/builtin.ts`
+- Runtime core: `src/core/switchboard.ts`
+- Compatibility policy: `src/core/report.ts`
+- Browser-safe entry: `src/browser.ts`
 
-3. Good engineering baseline
-- `verify` gate includes lint/typecheck/test/build.
-- CI and publish pipelines are complete:
-  - `.github/workflows/ci.yml`
-  - `.github/workflows/publish.yml`
-  - `.github/workflows/publish-github-packages.yml`
-  - `.github/workflows/pages.yml`
+3. Engineering quality baseline is solid
+- `verify` gate is green.
+- Playwright E2E is integrated in CI.
+- Coverage exceeds target thresholds.
 
-4. Documentation and ecosystem consistency
-- EN/ZH README quality is good and mostly aligned.
-- Landing page follows shared ecosystem IA.
-- Cross-links to docsjs and matrix docs are in place.
+4. Ecosystem consistency is strong
+- README EN/ZH + landing page + demos are aligned.
+- Cross-promotion with docsjs and docsjs-markdown is present.
 
 ## 4. Gaps and Risks
 
-### P0 (must fix soon)
+### P0
 
-1. Coverage blind spots in non-core files
-- `scripts/benchmark-switchboard.mjs`: 0%
-- `src/index.ts`: 0%
-- `src/types.ts`: 0%
-- Risk: regression can slip through in package surface and tooling.
+1. Enterprise stress scenarios are not covered
+- Risk: large-document and high-frequency switch behavior may regress without dedicated stress suite.
 
-### P1 (important)
+### P1
 
-1. E2E depth is still shallow
-- Risk: smoke can catch mount failures, but complex switch/regression paths may still be missed.
+1. E2E depth is still baseline
+- Risk: complex semantics (table/list/math-heavy switching) may regress undetected.
 
-2. Fallback policy currently tag-level and generic
-- Risk: complex enterprise HTML may need richer node-level transform policies.
+2. Fallback policy is configurable but tag-centric
+- Risk: some enterprise content needs node-level / semantic-level transform rules.
 
-### P2 (next wave)
+### P2
 
-1. No tenant/profile-based editor policy presets
-2. No benchmark trend history output (currently one-shot console output)
+1. No tenant-level policy presets yet
+2. No long-term benchmark trend dashboard yet
 
 ## 5. Coverage and Test Analysis
 
@@ -100,107 +96,98 @@ npm run test:coverage
 
 Current coverage summary:
 
-- All files: statements **70.5%**, branches **78.48%**, functions **89.36%**, lines **70.5%**
-- Core modules are strong:
+- All files: statements **95.1%**, branches **79.26%**, functions **93.47%**, lines **95.1%**
+- Key modules:
   - `src/adapters/builtin.ts`: statements **91.17%**
-  - `src/core/report.ts`: statements **95.55%**
+  - `src/core/report.ts`: statements **99.02%**
   - `src/core/switchboard.ts`: statements **94.73%**
   - `src/docsjs.ts`: statements **100%**
 
 Interpretation:
 
-- Core behavior is already well-covered.
-- Overall percentage is pulled down by script/barrel/type files not targeted by tests.
+- Coverage target (>=80 statements/lines) is significantly exceeded.
+- Main residual branch gaps are acceptable for current stage.
 
 ## 6. Demo Analysis (React / Vue / Plain)
 
 Current state:
 
-- Plain demos: good
+- Plain demos:
   - `demos/multi-switch.html` (5 editors)
   - `demos/tiptap-switch.html`
-- React demo: available
-  - `demos/react-demo/index.html`
-- Vue demo: available
-  - `demos/vue-demo/index.html`
+- React demos:
+  - `demos/react-demo/index.html` (browser demo)
+  - `demos/react-vite/` (engineering template)
+- Vue demos:
+  - `demos/vue-demo/index.html` (browser demo)
+  - `demos/vue-vite/` (engineering template)
 
-Recommendation:
+E2E baseline:
 
-- Add framework quick-start links on landing page and README (already partially completed).
-- Add browser E2E smoke for React/Vue demos.
+- `tests/e2e/demo-smoke.spec.ts`
+- validates apply/switch/read flow for React and Vue demos.
 
-## 7. Documentation & Landing Page Analysis
+## 7. Documentation and Landing Page Analysis
 
 README (EN/ZH):
 
-- Strong:
-  - feature overview
-  - API summary
-  - demos links
-  - publish rules
-- Improvement:
-  - add explicit React/Vue status section (available / planned)
+- Strengths:
+  - clear API surface
+  - demo matrix
+  - publish/CI/benchmark commands
+  - browser-safe entry docs
 
 Landing page (`docs/index.html`):
 
-- Strong:
-  - clear hero and value proposition
-  - section architecture consistent with ecosystem
-  - direct link to 5-editor demo and matrix
-- Improvement:
-  - add “Quick start by framework” block (React/Vue/Vanilla)
+- Strengths:
+  - standard ecosystem IA
+  - demo/matrix links
+  - framework quick-start section
 
 ## 8. Cross-Promotion and Ecosystem Fit
 
-Current status: good.
+Status: good.
 
-- docsjs-editor <-> docsjs links exist.
-- docsjs-editor mentions docsjs-markdown workflow chain.
-- Landing page and README follow same ecosystem IA model.
-
-Recommendation:
-
-- Add explicit “workflow chain card”: docsjs -> docsjs-editor -> docsjs-markdown.
+- docsjs-editor <-> docsjs links are present.
+- docsjs-editor <-> docsjs-markdown workflow is documented.
+- The shared landing template keeps plugin family consistency.
 
 ## 9. Action Plan
 
 ### P0
 
-1. Strengthen E2E assertions beyond smoke
-- Impact: improve production confidence for switch and content persistence.
-- Target: `tests/e2e/*`
-- Acceptance: include switch + apply + read roundtrip assertions on at least 2 demos.
+1. Add enterprise stress benchmark suite
+- Impact: improve performance confidence in large documents.
+- Target: `scripts/benchmark-switchboard.mjs` + additional stress fixtures.
+- Acceptance: outputs stress metrics JSON for large/synthetic workloads.
 
 ### P1
 
-1. Add framework quick-start block in landing page
-- Impact: shorten onboarding path for React/Vue/Vanilla teams.
-- Target: `docs/index.html`
-- Acceptance: three explicit quick-start links and copy snippets by framework.
+1. Expand E2E semantic scenarios
+- Impact: reduce regressions for complex content.
+- Target: `tests/e2e/*`
+- Acceptance: includes list/table-heavy and fallback-policy cases.
 
-2. Improve coverage policy
-- Impact: stabilize package entry/tooling reliability.
-- Target: tests for `src/index.ts` exports + benchmark script sanity.
-- Acceptance: overall statements >= 80% with meaningful assertions.
+2. Add policy preset packs
+- Impact: faster enterprise onboarding by editor/profile.
+- Target: `src/core/report.ts` + config presets.
+- Acceptance: named presets (strict enterprise, collaborative, docs-heavy).
 
 ### P2
 
-1. Extend fallback policy engine
-- Impact: better enterprise compatibility.
-- Target: `src/core/report.ts` + strategy config file
-- Acceptance: per-editor configurable policy map, with unit tests.
-
-2. Persist benchmark trend
-- Impact: track performance regression over releases.
-- Target: `scripts/benchmark-switchboard.mjs` output JSON artifact.
-- Acceptance: benchmark writes machine-readable report.
+1. Add benchmark history trend output
+- Impact: release-over-release performance tracking.
+- Target: `artifacts/benchmark-switchboard.json` history workflow.
+- Acceptance: trend artifact generated on CI and retained.
 
 ## 10. Next Milestone Definition
 
-Milestone: **L3 Growth-ready**
+Milestone: **L5 Ecosystem-ready**
 
 Exit criteria:
 
-1. E2E smoke workflow checks at least one framework demo path.
-2. Coverage >= 80% statements without fake tests.
-3. Landing page includes framework quick-start links.
+1. enterprise stress benchmark suite is automated in CI.
+2. semantic E2E suite covers core edge content types.
+3. policy preset packs are documented and tested.
+4. benchmark trend history is generated and reviewable.
+

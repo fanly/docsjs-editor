@@ -15,6 +15,11 @@ export interface CompatibilityReport {
   unsupported: UnsupportedBlock[];
 }
 
+export interface FallbackPolicyConfig {
+  defaultActions?: Partial<Record<string, FallbackAction>>;
+  editorOverrides?: Record<string, Partial<Record<string, FallbackAction>>>;
+}
+
 const COMMON_UNSUPPORTED: Record<string, string> = {
   table: "Complex table semantics may lose fidelity in some editors",
   math: "MathML/OMML blocks usually require plugin support",
@@ -46,25 +51,40 @@ const EDITOR_OVERRIDES: Record<string, Partial<Record<string, FallbackAction>>> 
   }
 };
 
+const DEFAULT_ACTIONS: Record<string, FallbackAction> = {
+  iframe: "strip",
+  math: "replace-with-code",
+  svg: "replace-with-code",
+  table: "replace-with-paragraph",
+  video: "replace-with-paragraph"
+};
+
 function countTag(html: string, tag: string): number {
   const regex = new RegExp(`<${tag}\\b`, "gi");
   const matches = html.match(regex);
   return matches ? matches.length : 0;
 }
 
-function resolveAction(editor: string, tag: string): FallbackAction {
-  const override = EDITOR_OVERRIDES[editor]?.[tag];
+function resolveAction(editor: string, tag: string, config: FallbackPolicyConfig = {}): FallbackAction {
+  const mergedOverrides = {
+    ...EDITOR_OVERRIDES,
+    ...(config.editorOverrides ?? {})
+  };
+  const mergedDefaults = {
+    ...DEFAULT_ACTIONS,
+    ...(config.defaultActions ?? {})
+  };
+
+  const override = mergedOverrides[editor]?.[tag];
   if (override) return override;
 
-  if (tag === "iframe") return "strip";
-  if (tag === "math" || tag === "svg") return "replace-with-code";
-  if (tag === "table") return "replace-with-paragraph";
-  return "keep";
+  return mergedDefaults[tag] ?? "keep";
 }
 
 export function buildCompatibilityReport(
   html: string,
-  editor: BuiltinEditorType | string
+  editor: BuiltinEditorType | string,
+  config: FallbackPolicyConfig = {}
 ): CompatibilityReport {
   const unsupported: UnsupportedBlock[] = [];
 
@@ -75,7 +95,7 @@ export function buildCompatibilityReport(
         tag,
         count,
         reason,
-        action: resolveAction(editor, tag)
+        action: resolveAction(editor, tag, config)
       });
     }
   }

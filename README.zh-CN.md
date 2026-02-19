@@ -82,6 +82,8 @@ unbind();
 - Tiptap + Quill 切换示例：`demos/tiptap-switch.html`
 - React 示例：`demos/react-demo/index.html`
 - Vue 示例：`demos/vue-demo/index.html`
+- React + Vite 工程模板：`demos/react-vite/`
+- Vue + Vite 工程模板：`demos/vue-vite/`
 - Demo 说明：`demos/README.md`
 
 ## 集成文档
@@ -107,6 +109,10 @@ npm run benchmark:switchboard
 npx playwright install chromium
 npm run test:e2e
 ```
+
+基准结果输出文件：
+
+- `artifacts/benchmark-switchboard.json`
 
 ## 发布规则
 

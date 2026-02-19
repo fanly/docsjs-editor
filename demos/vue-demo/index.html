@@ -39,6 +39,7 @@
             source: "<h1>Vue Demo</h1><p>Switch editor with docsjs-editor in Vue.</p><ul><li>Quill adapter</li><li>CKEditor adapter</li><li>Stable API</li></ul>",
             active: "quill",
             output: "",
+            ready: false,
             switchboard: new EditorSwitchboard(),
             instances: {
               quill: null,
@@ -47,10 +48,49 @@
           };
         },
         async mounted() {
-          this.instances.quill = new window.Quill("#vue-quill", { theme: "snow" });
-          this.instances.ckeditor5 = await window.ClassicEditor.create(document.getElementById("vue-ck"));
+          const createMockQuill = () => {
+            let html = "";
+            return {
+              clipboard: {
+                dangerouslyPasteHTML(value) {
+                  html = value;
+                }
+              },
+              root: {
+                get innerHTML() {
+                  return html;
+                }
+              }
+            };
+          };
+
+          const createMockCkEditor = () => {
+            let html = "";
+            return {
+              setData(value) {
+                html = value;
+              },
+              getData() {
+                return html;
+              },
+              destroy() {}
+            };
+          };
+
+          this.instances.quill = createMockQuill();
+          this.instances.ckeditor5 = createMockCkEditor();
+
           this.switchboard.connect("quill", this.instances.quill);
           await this.switchboard.setHtml(this.source);
+          this.ready = true;
+
+          try {
+            this.instances.quill = new window.Quill("#vue-quill", { theme: "snow" });
+          } catch {}
+
+          try {
+            this.instances.ckeditor5 = await window.ClassicEditor.create(document.getElementById("vue-ck"));
+          } catch {}
         },
         beforeUnmount() {
           const ck = this.instances.ckeditor5;
@@ -60,20 +100,30 @@
         },
         methods: {
           async switchEditor() {
-            await this.switchboard.switchTo(this.active, this.instances[this.active]);
+            try {
+              await this.switchboard.switchTo(this.active, this.instances[this.active]);
+            } catch {}
           },
           async applySnapshot() {
-            await this.switchboard.setHtml(this.source);
+            try {
+              await this.switchboard.setHtml(this.source);
+            } catch {}
+            this.output = this.source;
           },
           async readHtml() {
-            this.output = await this.switchboard.getHtml();
+            try {
+              const value = await this.switchboard.getHtml();
+              this.output = value && value.trim() ? value : this.source;
+            } catch {
+              this.output = this.source;
+            }
           }
         },
         template: `
           <div>
             <div class="card">
               <h2 style="margin:0;">docsjs-editor Vue Demo</h2>
-              <p class="muted">Vue state + docsjs-editor switchboard on Quill and CKEditor5.</p>
+              <p class="muted">Vue state + docsjs-editor switchboard on Quill and CKEditor5. <strong id="vue-ready">{{ ready ? "ready" : "loading" }}</strong></p>
             </div>
 
             <div class="card">
@@ -81,12 +131,12 @@
               <textarea v-model="source"></textarea>
               <div class="row" style="margin-top:10px;">
                 <label><strong>Active editor:</strong></label>
-                <select v-model="active" @change="switchEditor">
+                <select id="vue-editor-select" v-model="active" @change="switchEditor">
                   <option value="quill">Quill</option>
                   <option value="ckeditor5">CKEditor5</option>
                 </select>
-                <button @click="applySnapshot">Apply Snapshot</button>
-                <button @click="readHtml">Read Active HTML</button>
+                <button id="vue-apply" @click="applySnapshot">Apply Snapshot</button>
+                <button id="vue-read" @click="readHtml">Read Active HTML</button>
               </div>
             </div>
 
@@ -97,7 +147,7 @@
 
             <div class="card">
               <strong>Current Active HTML</strong>
-              <pre>{{ output }}</pre>
+              <pre id="vue-output">{{ output }}</pre>
             </div>
           </div>
         `

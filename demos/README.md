@@ -10,6 +10,8 @@ These demos show runtime switching between mainstream editors with a unified doc
 - `demos/tiptap-switch.html`: Tiptap + Quill runtime switch
 - `demos/react-demo/index.html`: React demo (Quill + CKEditor5 switch)
 - `demos/vue-demo/index.html`: Vue demo (Quill + CKEditor5 switch)
+- `demos/react-vite/`: React + Vite engineering template
+- `demos/vue-vite/`: Vue + Vite engineering template
 
 ## Run locally
 
@@ -31,6 +33,7 @@ npx serve .
 - `http://localhost:3000/demos/tiptap-switch.html`
 - `http://localhost:3000/demos/react-demo/index.html`
 - `http://localhost:3000/demos/vue-demo/index.html`
+- `demos/react-vite` and `demos/vue-vite` are independent Vite projects, run separately.
 
 ## Notes
 

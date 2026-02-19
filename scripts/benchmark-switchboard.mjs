@@ -1,23 +1,5 @@
-function normalize(html) {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
-}
-
-function driftScore(a, b) {
-  const aa = normalize(a);
-  const bb = normalize(b);
-  if (!aa && !bb) return 0;
-
-  const ta = new Set(aa.split(" ").filter(Boolean));
-  const tb = new Set(bb.split(" ").filter(Boolean));
-  const union = new Set([...ta, ...tb]);
-  let intersection = 0;
-  for (const token of ta) {
-    if (tb.has(token)) intersection += 1;
-  }
-
-  const similarity = union.size === 0 ? 1 : intersection / union.size;
-  return Number((1 - similarity).toFixed(4));
-}
+import { mkdirSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 function mockAdapter(name) {
   let html = "";
@@ -46,7 +28,9 @@ async function run() {
     };
   }
 
-  const { EditorSwitchboard, buildCompatibilityReport, applyFallbackPolicy } = await import("../dist/index.js");
+  const { EditorSwitchboard, buildCompatibilityReport, applyFallbackPolicy, driftScore } = await import(
+    "../dist/index.js"
+  );
 
   const sample = "<h1>Release Plan</h1><p>docsjs snapshot.</p><ul><li>Import</li><li>Switch</li><li>Deliver</li></ul><table><tr><td>A</td></tr></table>";
 
@@ -109,11 +93,17 @@ async function run() {
     switchMs: Number((switchEnd - switchStart).toFixed(2)),
     compatibilityScore: report.score,
     unsupportedBlocks: report.unsupported,
-    driftScore: driftScore(sample, output)
+    driftScore: driftScore(sample, output),
+    generatedAt: new Date().toISOString()
   };
 
+  const outDir = resolve(process.cwd(), "artifacts");
+  mkdirSync(outDir, { recursive: true });
+  const outFile = resolve(outDir, "benchmark-switchboard.json");
+  writeFileSync(outFile, `${JSON.stringify({ ...result, outputFile: outFile }, null, 2)}\n`, "utf8");
+
   console.log("docsjs-editor switchboard benchmark");
-  console.log(JSON.stringify(result, null, 2));
+  console.log(JSON.stringify({ ...result, outputFile: outFile }, null, 2));
 }
 
 run().catch((error) => {

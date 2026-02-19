@@ -86,6 +86,8 @@ unbind();
 - Tiptap + Quill switch demo: `demos/tiptap-switch.html`
 - React demo: `demos/react-demo/index.html`
 - Vue demo: `demos/vue-demo/index.html`
+- React + Vite engineering template: `demos/react-vite/`
+- Vue + Vite engineering template: `demos/vue-vite/`
 - Demo guide: `demos/README.md`
 
 ## Integration Docs
@@ -111,6 +113,10 @@ npm run benchmark:switchboard
 npx playwright install chromium
 npm run test:e2e
 ```
+
+Benchmark output artifact:
+
+- `artifacts/benchmark-switchboard.json`
 
 ## Publishing
 
