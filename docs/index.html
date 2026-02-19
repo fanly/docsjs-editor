@@ -198,7 +198,7 @@
           </article>
           <article class="card">
             <h3 data-i18n="f4Title">Ecosystem Pairing</h3>
-            <p data-i18n="f4Desc">Combine with docsjs and docsjs-markdown to build full Word -> Editor -> Markdown workflows.</p>
+            <p data-i18n="f4Desc">Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.</p>
           </article>
           <article class="card">
             <h3 data-i18n="f5Title">Demo & Matrix Ready</h3>
@@ -233,17 +233,27 @@
 
     <section class="showcase" id="showcase">
       <div class="container">
-        <h2 data-i18n="showcaseTitle">Complete Case: Left docsjs, Right active editor</h2>
+        <h2 data-i18n="showcaseTitle">Complete Case: One content, multiple editor adapters</h2>
         <div class="code-window">
           <div class="code-header"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
           <div class="code-content">
-            <pre><code class="language-ts">import { EditorSwitchboard, bindDocsjsChangeToEditor } from "@coding01/docsjs-editor";
+            <pre><code class="language-ts">import { EditorSwitchboard } from "@coding01/docsjs-editor";
 
 const switchboard = new EditorSwitchboard();
-const adapter = switchboard.connect("tiptap", tiptapEditor);
-bindDocsjsChangeToEditor(docsjsElement, adapter);
+switchboard.connect("tiptap", tiptapEditor);
+switchboard.connect("quill", quillEditor);
+switchboard.connect("ckeditor5", ckEditor);
 
-await switchboard.switchTo("quill", quillEditor);</code></pre>
+const canonicalHtml = docsjsElement.getSnapshot();
+
+await switchboard.switchTo("tiptap");
+await switchboard.setHtml(canonicalHtml);
+
+await switchboard.switchTo("quill");
+await switchboard.setHtml(canonicalHtml);
+
+await switchboard.switchTo("ckeditor5");
+await switchboard.setHtml(canonicalHtml);</code></pre>
           </div>
         </div>
 
@@ -251,23 +261,23 @@ await switchboard.switchTo("quill", quillEditor);</code></pre>
           <div class="panel">
             <div class="panel-title" data-i18n="leftTitle">Left: docsjs HTML snapshot</div>
             <div class="panel-body"><pre><code class="language-markup">&lt;h1&gt;Quarter Plan&lt;/h1&gt;
-&lt;p&gt;Parser and editor pipeline are upgraded.&lt;/p&gt;
+&lt;p&gt;One source content rendered across multiple editor engines.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;DOCX fidelity import&lt;/li&gt;
   &lt;li&gt;Editor runtime switch&lt;/li&gt;
-  &lt;li&gt;Markdown delivery&lt;/li&gt;
+  &lt;li&gt;Content parity checks&lt;/li&gt;
 &lt;/ul&gt;</code></pre></div>
           </div>
           <div class="panel">
-            <div class="panel-title" data-i18n="rightTitle">Right: editor rendered content</div>
-            <div class="panel-body"><pre><code class="language-markdown">[Tiptap / Quill / CKEditor5 view]
-
-Quarter Plan
-Parser and editor pipeline are upgraded.
-
-- DOCX fidelity import
-- Editor runtime switch
-- Markdown delivery</code></pre></div>
+            <div class="panel-title" data-i18n="rightTitle">Right: same content after adapter switch</div>
+            <div class="panel-body"><pre><code class="language-json">{
+  "activeEditor": "quill",
+  "source": "docsjs snapshot",
+  "sameHeading": true,
+  "sameListCount": 3,
+  "parityCheck": "pass",
+  "preview": "Quarter Plan | DOCX fidelity import | Editor runtime switch | Content parity checks"
+}</code></pre></div>
           </div>
         </div>
       </div>
@@ -325,7 +335,7 @@ Parser and editor pipeline are upgraded.
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
     <script>
       const i18n = {
         en: {
@@ -357,12 +367,12 @@ Parser and editor pipeline are upgraded.
           f3Title: "docsjs Native Bridge",
           f3Desc: "Bind docsjs events directly and pipe HTML snapshots into your target editor in one step.",
           f4Title: "Ecosystem Pairing",
-          f4Desc: "Combine with docsjs and docsjs-markdown to build full Word -> Editor -> Markdown workflows.",
+          f4Desc: "Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.",
           f5Title: "Demo & Matrix Ready",
           f5Desc: "Use multi-switch demo and capability matrix to evaluate editor fit before production rollout.",
-          showcaseTitle: "Complete Case: Left docsjs, Right active editor",
+          showcaseTitle: "Complete Case: One content, multiple editor adapters",
           leftTitle: "Left: docsjs HTML snapshot",
-          rightTitle: "Right: editor rendered content",
+          rightTitle: "Right: same content after adapter switch",
           apiTitle: "API Reference",
           apiCore: "Switchboard",
           apiBridge: "docsjs Bridge",
@@ -408,12 +418,12 @@ Parser and editor pipeline are upgraded.
           f3Title: "docsjs 原生桥接",
           f3Desc: "直接绑定 docsjs 事件，一步把 HTML 快照注入目标编辑器。",
           f4Title: "生态联动",
-          f4Desc: "可与 docsjs、docsjs-markdown 联动，形成 Word -> Editor -> Markdown 全链路。",
+          f4Desc: "与 docsjs 组合形成规范化内容源，在多个编辑器提供方之间保持同一内容链路与一致性。",
           f5Title: "Demo 与能力矩阵",
           f5Desc: "通过多编辑器切换 Demo 与能力矩阵，在生产落地前快速评估编辑器方案。",
-          showcaseTitle: "完整案例：左 docsjs，右编辑器呈现",
+          showcaseTitle: "完整案例：一份内容，多编辑器适配切换",
           leftTitle: "左：docsjs HTML 快照",
-          rightTitle: "右：编辑器渲染结果",
+          rightTitle: "右：切换适配器后的同一内容结果",
           apiTitle: "API 参考",
           apiCore: "切换内核",
           apiBridge: "docsjs 桥接",
