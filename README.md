@@ -77,6 +77,17 @@ unbind();
 - `importDocxToEditor(file, adapter, options)`
 - `bindDocsjsChangeToEditor(host, adapter)`
 
+## Demos
+
+- Multi-editor runtime switch demo: `demos/multi-switch.html`
+- Demo guide: `demos/README.md`
+
+## Integration Docs
+
+- Capability matrix: `docs/EDITOR_CAPABILITY_MATRIX.md`
+- Integration guide: `docs/INTEGRATION_GUIDE.md`
+- Roadmap: `docs/EDITOR_INTEGRATION_ROADMAP.md`
+
 ## Landing Page Template Rule
 
 For docsjs ecosystem plugin pages, we keep one shared page architecture template:

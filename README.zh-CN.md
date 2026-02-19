@@ -73,6 +73,17 @@ unbind();
 - `importDocxToEditor(file, adapter, options)`
 - `bindDocsjsChangeToEditor(host, adapter)`
 
+## Demo
+
+- 多编辑器运行时切换示例：`demos/multi-switch.html`
+- Demo 说明：`demos/README.md`
+
+## 集成文档
+
+- 能力矩阵：`docs/EDITOR_CAPABILITY_MATRIX.md`
+- 集成指南：`docs/INTEGRATION_GUIDE.md`
+- 路线图：`docs/EDITOR_INTEGRATION_ROADMAP.md`
+
 ## 单页模板规范
 
 为了与 docsjs 生态保持一致，插件单页采用统一架构模板：

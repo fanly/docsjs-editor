@@ -1,5 +1,17 @@
 import type { AdapterContext, BuiltinEditorType, CreateAdapterOptions, EditorAdapter } from "../types";
 
+export const BUILTIN_EDITOR_TYPES: BuiltinEditorType[] = [
+  "tiptap",
+  "quill",
+  "ckeditor5",
+  "tinymce",
+  "toast-ui",
+  "wangeditor",
+  "prosemirror",
+  "lexical",
+  "slate"
+];
+
 function expectFunction<T>(
   value: unknown,
   label: string
