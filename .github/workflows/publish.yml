@@ -56,7 +56,6 @@ jobs:
 
       - name: Publish (Trusted Publisher with token fallback)
         env:
-          NODE_AUTH_TOKEN: ""
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
