@@ -3,23 +3,26 @@ import { defineConfig } from "vite-plus";
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/index.ts",
+      entry: {
+        index: "src/index.ts",
+        browser: "src/browser.ts",
+      },
       name: "DocsjsEditor",
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
+      fileName: (format, entryName) => `${entryName}.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
       output: [
         {
           dir: "dist",
           format: "es",
-          entryFileNames: "index.js",
+          entryFileNames: "[name].js",
           chunkFileNames: "chunks/[name]-[hash].js",
         },
         {
           dir: "dist",
           format: "cjs",
-          entryFileNames: "index.cjs",
+          entryFileNames: "[name].cjs",
           chunkFileNames: "chunks/[name]-[hash].cjs",
         },
       ],

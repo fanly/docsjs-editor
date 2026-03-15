@@ -49,6 +49,7 @@
     "lint": "vp lint .",
     "fmt": "vp fmt .",
     "test": "vp test run",
+    "test:e2e": "playwright test",
     "test:watch": "vp test",
     "verify": "vp check && vp lint . && vp test run && vp build"
   },
