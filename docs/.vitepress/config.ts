@@ -2,9 +2,8 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   title: "DocsJS Editor",
-  description: "Multi-editor integration bridge for DocsJS",
+  description: "Multi-Editor Integration for DocsJS",
   lang: "en-US",
-  css: ["./theme/style.css"],
   head: [
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
