@@ -1,4 +1,3 @@
-import { parseDocxToHtmlSnapshot } from "@coding01/docsjs";
 import type { DocsjsImportOptions, EditorAdapter } from "./types";
 
 interface DocsjsChangeDetail {
@@ -23,6 +22,7 @@ export async function importDocxToEditor(
   options: DocsjsImportOptions = {},
 ): Promise<string> {
   void options;
+  const { parseDocxToHtmlSnapshot } = await import("@coding01/docsjs");
   const result = await parseDocxToHtmlSnapshot(file);
   const payload = result as string | { htmlSnapshot?: string };
   const html = typeof payload === "string" ? payload : (payload.htmlSnapshot ?? "");

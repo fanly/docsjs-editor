@@ -1,6 +1,6 @@
 {
   "name": "@coding01/docsjs-editor",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Multi-editor integration bridge for docsjs HTML snapshots and DOCX workflows",
   "keywords": [
     "ckeditor",

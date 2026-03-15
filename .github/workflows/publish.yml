@@ -45,5 +45,14 @@ jobs:
       - name: Debug version
         run: echo "Publishing version ${{ steps.version.outputs.VERSION }}"
 
+      - name: Validate tag matches package version
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${{ steps.version.outputs.VERSION }}"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match package.json version ($PKG_VERSION)."
+            exit 1
+          fi
+
       - name: Publish
         run: npm publish --provenance --access public
