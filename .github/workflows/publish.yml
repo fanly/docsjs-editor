@@ -54,25 +54,5 @@ jobs:
             exit 1
           fi
 
-      - name: Publish (Trusted Publisher with token fallback)
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          set -euo pipefail
-          set +e
-          npm publish --provenance --access public 2>&1 | tee /tmp/npm-publish.log
-          status=${PIPESTATUS[0]}
-          set -e
-
-          if [ "$status" -eq 0 ]; then
-            exit 0
-          fi
-
-          if grep -q "npm error code E404" /tmp/npm-publish.log && [ -n "${NPM_TOKEN:-}" ]; then
-            echo "Trusted Publisher not active for this package yet; retrying with NPM_TOKEN bootstrap publish."
-            printf "//registry.npmjs.org/:_authToken=%s\n" "$NPM_TOKEN" > "$HOME/.npmrc"
-            npm publish --access public
-            exit 0
-          fi
-
-          exit "$status"
+      - name: Publish
+        run: npm publish --provenance --access public
