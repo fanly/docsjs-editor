@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from "@voidzero-dev/vite-plus-test/config";
 
 export default defineConfig({
   test: {
@@ -14,8 +14,8 @@ export default defineConfig({
         statements: 80,
         branches: 75,
         functions: 85,
-        lines: 80
-      }
-    }
-  }
+        lines: 80,
+      },
+    },
+  },
 });

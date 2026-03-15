@@ -2,13 +2,13 @@
 
 ## 内置适配器
 
-| 适配器 | 类型 | 支持 |
-|--------|------|------|
-| tiptap | `tiptap` | ✅ 完全 |
-| quill | `quill` | ✅ 完全 |
-| ckeditor5 | `ckeditor5` | ✅ 完全 |
-| tinymce | `tinymce` | ✅ 完全 |
-| toastui | `toast-ui` | ✅ 完全 |
+| 适配器     | 类型         | 支持    |
+| ---------- | ------------ | ------- |
+| tiptap     | `tiptap`     | ✅ 完全 |
+| quill      | `quill`      | ✅ 完全 |
+| ckeditor5  | `ckeditor5`  | ✅ 完全 |
+| tinymce    | `tinymce`    | ✅ 完全 |
+| toastui    | `toast-ui`   | ✅ 完全 |
 | wangeditor | `wangeditor` | ✅ 完全 |
 
 ## 创建自定义适配器
@@ -21,7 +21,7 @@ const customAdapter: EditorAdapter = createBuiltinAdapter(
   {
     getHtml: () => myEditor.getHTML(),
     setHtml: (html) => myEditor.setHTML(html),
-  }
+  },
 );
 ```
 

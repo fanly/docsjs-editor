@@ -132,7 +132,7 @@ await switchboard.switchTo("quill", quillEditor);
 
 ## 生态系统
 
-| 包 | 描述 |
-|---------|-------------|
-| [DocsJS](https://docsjs.coding01.cn) | 高保真 Word/DOCX 导入 |
-| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown 输出转换 |
+| 包                                                          | 描述                  |
+| ----------------------------------------------------------- | --------------------- |
+| [DocsJS](https://docsjs.coding01.cn)                        | 高保真 Word/DOCX 导入 |
+| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown 输出转换     |

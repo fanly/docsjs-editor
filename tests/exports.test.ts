@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 
 describe("package exports", () => {
   it("exposes core API from main entry", async () => {
@@ -11,7 +11,7 @@ describe("package exports", () => {
         define() {},
         get() {
           return undefined;
-        }
+        },
       };
     }
 

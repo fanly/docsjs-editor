@@ -5,6 +5,7 @@ Welcome to the DocsJS Editor documentation.
 ## What is DocsJS Editor?
 
 DocsJS Editor is a multi-editor integration bridge that allows you to:
+
 - Connect to multiple rich text editors with a unified API
 - Switch between editors at runtime while preserving content
 - Seamlessly integrate with DocsJS HTML snapshots

@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>docsjs-editor multi switch demo (5 editors)</title>
     <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
-    />
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
     <style>
       body {
         margin: 0;
@@ -103,14 +100,17 @@
       <div class="panel">
         <h1>docsjs-editor Multi-Editor Switch Demo</h1>
         <p class="meta">
-          Live switch between Tiptap, Quill, CKEditor5, TinyMCE and Toast UI while preserving content.
+          Live switch between Tiptap, Quill, CKEditor5, TinyMCE and Toast UI while preserving
+          content.
         </p>
       </div>
 
       <div class="panel">
         <label for="source"><strong>docsjs HTML Snapshot (input)</strong></label>
-        <textarea id="source"><h1>Quarter Plan</h1><p>Use docsjs snapshot as unified input.</p><ul><li>DOCX fidelity</li><li>Runtime editor switch</li><li>Markdown handoff</li></ul></textarea>
-        <div class="row" style="margin-top: 10px;">
+        <textarea id="source">
+<h1>Quarter Plan</h1><p>Use docsjs snapshot as unified input.</p><ul><li>DOCX fidelity</li><li>Runtime editor switch</li><li>Markdown handoff</li></ul></textarea
+        >
+        <div class="row" style="margin-top: 10px">
           <button id="btn-apply">Apply Snapshot To Active Editor</button>
           <button id="btn-read">Read Active Editor HTML</button>
           <label for="editor-type"><strong>Active Editor:</strong></label>
@@ -125,7 +125,9 @@
       </div>
 
       <div class="panel editor-host">
-        <div id="box-tiptap" class="editor-box active"><div id="tiptap-editor" class="tiptap-host"></div></div>
+        <div id="box-tiptap" class="editor-box active">
+          <div id="tiptap-editor" class="tiptap-host"></div>
+        </div>
         <div id="box-quill" class="editor-box"><div id="quill-editor"></div></div>
         <div id="box-ckeditor5" class="editor-box"><div id="ck-editor"></div></div>
         <div id="box-tinymce" class="editor-box"><textarea id="tiny-editor"></textarea></div>
@@ -140,7 +142,10 @@
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script
+      src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
     <script type="module">
@@ -159,26 +164,26 @@
         quill: document.getElementById("box-quill"),
         ckeditor5: document.getElementById("box-ckeditor5"),
         tinymce: document.getElementById("box-tinymce"),
-        "toast-ui": document.getElementById("box-toast-ui")
+        "toast-ui": document.getElementById("box-toast-ui"),
       };
 
       const tiptap = new Editor({
         element: document.getElementById("tiptap-editor"),
         extensions: [StarterKit],
-        content: "<p>ready</p>"
+        content: "<p>ready</p>",
       });
       const quill = new window.Quill("#quill-editor", { theme: "snow" });
       const ckeditor5 = await window.ClassicEditor.create(document.getElementById("ck-editor"));
       await window.tinymce.init({
         target: document.getElementById("tiny-editor"),
         menubar: false,
-        height: 240
+        height: 240,
       });
       const tinymce = window.tinymce.get("tiny-editor");
       const toastui = new window.toastui.Editor({
         el: document.getElementById("toast-editor"),
         initialEditType: "wysiwyg",
-        height: "260px"
+        height: "260px",
       });
 
       const instances = {
@@ -186,7 +191,7 @@
         quill,
         ckeditor5,
         tinymce,
-        "toast-ui": toastui
+        "toast-ui": toastui,
       };
 
       const board = new EditorSwitchboard();

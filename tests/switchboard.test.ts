@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { EditorSwitchboard } from "../src/core/switchboard";
 
 describe("EditorSwitchboard", () => {
@@ -8,10 +8,10 @@ describe("EditorSwitchboard", () => {
       commands: {
         setContent: (value: string) => {
           tiptapHtml = value;
-        }
+        },
       },
       getHTML: () => tiptapHtml,
-      chain: () => ({ focus: () => ({ run: () => undefined }) })
+      chain: () => ({ focus: () => ({ run: () => undefined }) }),
     };
 
     let quillHtml = "";
@@ -19,13 +19,13 @@ describe("EditorSwitchboard", () => {
       clipboard: {
         dangerouslyPasteHTML: (value: string) => {
           quillHtml = value;
-        }
+        },
       },
       root: {
         get innerHTML() {
           return quillHtml;
-        }
-      }
+        },
+      },
     };
 
     const board = new EditorSwitchboard();
@@ -42,12 +42,16 @@ describe("EditorSwitchboard", () => {
     let html = "";
     const board = new EditorSwitchboard();
 
-    board.connect("custom-x", {}, {
-      fallbackSetHtml: (value) => {
-        html = value;
+    board.connect(
+      "custom-x",
+      {},
+      {
+        fallbackSetHtml: (value) => {
+          html = value;
+        },
+        fallbackGetHtml: () => html,
       },
-      fallbackGetHtml: () => html
-    });
+    );
 
     await board.setHtml("<h1>ok</h1>");
     expect(await board.getHtml()).toBe("<h1>ok</h1>");

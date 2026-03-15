@@ -27,30 +27,32 @@ Main gaps toward L5 ecosystem-ready:
 
 ## 2. Scorecard
 
-| Dimension | Score (1-5) | Evidence |
-|---|---:|---|
-| Product capability depth | 5 | `src/core/switchboard.ts`, `src/adapters/builtin.ts`, `src/docsjs.ts`, `src/core/report.ts` |
-| Product completeness | 5 | core + docs + demos + CI/publish/pages complete |
-| Technical architecture capability | 5 | layered architecture + browser-safe entry |
-| Technical model & extensibility | 5 | built-in adapters + generic hooks + policy config |
-| Code style & conventions | 4 | strict TS + ESLint + modular boundaries |
-| Code constraints & quality gates | 5 | `verify`, CI quality gate, release workflows |
-| Test strategy & coverage | 5 | unit + E2E smoke; coverage 95.1% |
-| React demo completeness | 4 | `demos/react-demo/index.html`, `demos/react-vite/` |
-| Vue demo completeness | 4 | `demos/vue-demo/index.html`, `demos/vue-vite/` |
-| Bilingual README quality | 4 | EN/ZH parity, API/demo/ops links complete |
-| Landing page quality | 5 | ecosystem IA + quick-start + demo links |
-| Cross-promotion quality | 4 | docsjs/docsjs-markdown mutual links |
-| Release automation readiness | 5 | npm + GPR + Pages pipelines |
+| Dimension                         | Score (1-5) | Evidence                                                                                    |
+| --------------------------------- | ----------: | ------------------------------------------------------------------------------------------- |
+| Product capability depth          |           5 | `src/core/switchboard.ts`, `src/adapters/builtin.ts`, `src/docsjs.ts`, `src/core/report.ts` |
+| Product completeness              |           5 | core + docs + demos + CI/publish/pages complete                                             |
+| Technical architecture capability |           5 | layered architecture + browser-safe entry                                                   |
+| Technical model & extensibility   |           5 | built-in adapters + generic hooks + policy config                                           |
+| Code style & conventions          |           4 | strict TS + ESLint + modular boundaries                                                     |
+| Code constraints & quality gates  |           5 | `verify`, CI quality gate, release workflows                                                |
+| Test strategy & coverage          |           5 | unit + E2E smoke; coverage 95.1%                                                            |
+| React demo completeness           |           4 | `demos/react-demo/index.html`, `demos/react-vite/`                                          |
+| Vue demo completeness             |           4 | `demos/vue-demo/index.html`, `demos/vue-vite/`                                              |
+| Bilingual README quality          |           4 | EN/ZH parity, API/demo/ops links complete                                                   |
+| Landing page quality              |           5 | ecosystem IA + quick-start + demo links                                                     |
+| Cross-promotion quality           |           4 | docsjs/docsjs-markdown mutual links                                                         |
+| Release automation readiness      |           5 | npm + GPR + Pages pipelines                                                                 |
 
 Overall maturity: **L4 Production-ready**
 
 ## 3. Strengths
 
 1. Product direction is clear and differentiated
+
 - Focuses on real problem: one API for multiple editor providers with docsjs integration.
 
 2. Architecture is clean and scalable
+
 - Contracts: `src/types.ts`
 - Adapter layer: `src/adapters/builtin.ts`
 - Runtime core: `src/core/switchboard.ts`
@@ -58,11 +60,13 @@ Overall maturity: **L4 Production-ready**
 - Browser-safe entry: `src/browser.ts`
 
 3. Engineering quality baseline is solid
+
 - `verify` gate is green.
 - Playwright E2E is integrated in CI.
 - Coverage exceeds target thresholds.
 
 4. Ecosystem consistency is strong
+
 - README EN/ZH + landing page + demos are aligned.
 - Cross-promotion with docsjs and docsjs-markdown is present.
 
@@ -71,14 +75,17 @@ Overall maturity: **L4 Production-ready**
 ### P0
 
 1. Enterprise stress scenarios are not covered
+
 - Risk: large-document and high-frequency switch behavior may regress without dedicated stress suite.
 
 ### P1
 
 1. E2E depth is still baseline
+
 - Risk: complex semantics (table/list/math-heavy switching) may regress undetected.
 
 2. Fallback policy is configurable but tag-centric
+
 - Risk: some enterprise content needs node-level / semantic-level transform rules.
 
 ### P2
@@ -157,6 +164,7 @@ Status: good.
 ### P0
 
 1. Add enterprise stress benchmark suite
+
 - Impact: improve performance confidence in large documents.
 - Target: `scripts/benchmark-switchboard.mjs` + additional stress fixtures.
 - Acceptance: outputs stress metrics JSON for large/synthetic workloads.
@@ -164,11 +172,13 @@ Status: good.
 ### P1
 
 1. Expand E2E semantic scenarios
+
 - Impact: reduce regressions for complex content.
 - Target: `tests/e2e/*`
 - Acceptance: includes list/table-heavy and fallback-policy cases.
 
 2. Add policy preset packs
+
 - Impact: faster enterprise onboarding by editor/profile.
 - Target: `src/core/report.ts` + config presets.
 - Acceptance: named presets (strict enterprise, collaborative, docs-heavy).
@@ -176,6 +186,7 @@ Status: good.
 ### P2
 
 1. Add benchmark history trend output
+
 - Impact: release-over-release performance tracking.
 - Target: `artifacts/benchmark-switchboard.json` history workflow.
 - Acceptance: trend artifact generated on CI and retained.
@@ -190,4 +201,3 @@ Exit criteria:
 2. semantic E2E suite covers core edge content types.
 3. policy preset packs are documented and tested.
 4. benchmark trend history is generated and reviewable.
-

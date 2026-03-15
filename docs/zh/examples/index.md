@@ -10,12 +10,12 @@ DocsJS Editor 最强大的功能是在编辑器之间运行时切换。
 <!-- 查看 demos/multi-switch.html 获取完整示例 -->
 <script type="module">
   import { EditorSwitchboard } from "@coding01/docsjs-editor";
-  
+
   const switchboard = new EditorSwitchboard();
-  
+
   // 连接 Tiptap
   const tiptapAdapter = switchboard.connect("tiptap", tiptapEditor);
-  
+
   // 稍后切换到 Quill
   await switchboard.switchTo("quill", quillEditor);
 </script>

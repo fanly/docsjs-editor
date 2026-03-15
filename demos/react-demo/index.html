@@ -6,19 +6,76 @@
     <title>docsjs-editor React Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet" />
     <style>
-      body { margin: 0; background: #f4f8fd; font-family: "Segoe UI", sans-serif; }
-      #app { max-width: 1100px; margin: 0 auto; padding: 18px; }
-      .card { background: #fff; border: 1px solid #d6e2ef; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
-      .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-      textarea { width: 100%; min-height: 120px; border: 1px solid #c3d5e8; border-radius: 8px; padding: 10px; font-family: Consolas, monospace; }
-      button, select { border: 1px solid #c3d5e8; background: #fff; border-radius: 8px; padding: 8px 10px; }
-      button { cursor: pointer; }
-      .editor-host { min-height: 260px; border: 1px solid #d6e2ef; border-radius: 8px; padding: 8px; }
-      .editor-box { display: none; }
-      .editor-box.active { display: block; }
-      #react-quill, #react-ck { min-height: 220px; }
-      pre { margin: 0; border: 1px solid #d6e2ef; border-radius: 8px; background: #f8fbff; padding: 10px; overflow: auto; font-size: 12px; }
-      .muted { color: #536a81; font-size: 13px; }
+      body {
+        margin: 0;
+        background: #f4f8fd;
+        font-family: "Segoe UI", sans-serif;
+      }
+      #app {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 18px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid #d6e2ef;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      textarea {
+        width: 100%;
+        min-height: 120px;
+        border: 1px solid #c3d5e8;
+        border-radius: 8px;
+        padding: 10px;
+        font-family: Consolas, monospace;
+      }
+      button,
+      select {
+        border: 1px solid #c3d5e8;
+        background: #fff;
+        border-radius: 8px;
+        padding: 8px 10px;
+      }
+      button {
+        cursor: pointer;
+      }
+      .editor-host {
+        min-height: 260px;
+        border: 1px solid #d6e2ef;
+        border-radius: 8px;
+        padding: 8px;
+      }
+      .editor-box {
+        display: none;
+      }
+      .editor-box.active {
+        display: block;
+      }
+      #react-quill,
+      #react-ck {
+        min-height: 220px;
+      }
+      pre {
+        margin: 0;
+        border: 1px solid #d6e2ef;
+        border-radius: 8px;
+        background: #f8fbff;
+        padding: 10px;
+        overflow: auto;
+        font-size: 12px;
+      }
+      .muted {
+        color: #536a81;
+        font-size: 13px;
+      }
     </style>
   </head>
   <body>
@@ -36,7 +93,9 @@
       const html = htm.bind(React.createElement);
 
       function App() {
-        const [source, setSource] = useState("<h1>React Demo</h1><p>Switch editor with docsjs-editor in React.</p><ul><li>Quill adapter</li><li>CKEditor adapter</li><li>Stable API</li></ul>");
+        const [source, setSource] = useState(
+          "<h1>React Demo</h1><p>Switch editor with docsjs-editor in React.</p><ul><li>Quill adapter</li><li>CKEditor adapter</li><li>Stable API</li></ul>",
+        );
         const [active, setActive] = useState("quill");
         const [output, setOutput] = useState("");
         const [ready, setReady] = useState(false);
@@ -50,13 +109,13 @@
             clipboard: {
               dangerouslyPasteHTML(value) {
                 html = value;
-              }
+              },
             },
             root: {
               get innerHTML() {
                 return html;
-              }
-            }
+              },
+            },
           };
         }
 
@@ -69,7 +128,7 @@
             getData() {
               return html;
             },
-            destroy() {}
+            destroy() {},
           };
         }
 
@@ -150,7 +209,10 @@
           <div>
             <div className="card">
               <h2 style=${{ margin: 0 }}>docsjs-editor React Demo</h2>
-              <p className="muted">React state + docsjs-editor switchboard on Quill and CKEditor5. <strong id="react-ready">${ready ? "ready" : "loading"}</strong></p>
+              <p className="muted">
+                React state + docsjs-editor switchboard on Quill and CKEditor5.
+                <strong id="react-ready">${ready ? "ready" : "loading"}</strong>
+              </p>
             </div>
 
             <div className="card">
@@ -158,7 +220,11 @@
               <textarea value=${source} onChange=${(e) => setSource(e.target.value)}></textarea>
               <div className="row" style=${{ marginTop: "10px" }}>
                 <label><strong>Active editor:</strong></label>
-                <select id="react-editor-select" value=${active} onChange=${(e) => switchEditor(e.target.value)}>
+                <select
+                  id="react-editor-select"
+                  value=${active}
+                  onChange=${(e) => switchEditor(e.target.value)}
+                >
                   <option value="quill">Quill</option>
                   <option value="ckeditor5">CKEditor5</option>
                 </select>
@@ -168,8 +234,12 @@
             </div>
 
             <div className="card editor-host">
-              <div className=${`editor-box ${active === "quill" ? "active" : ""}`}><div id="react-quill"></div></div>
-              <div className=${`editor-box ${active === "ckeditor5" ? "active" : ""}`}><div id="react-ck"></div></div>
+              <div className=${`editor-box ${active === "quill" ? "active" : ""}`}>
+                <div id="react-quill"></div>
+              </div>
+              <div className=${`editor-box ${active === "ckeditor5" ? "active" : ""}`}>
+                <div id="react-ck"></div>
+              </div>
             </div>
 
             <div className="card">

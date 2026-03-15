@@ -7,7 +7,7 @@ export class EditorSwitchboard {
   connect(
     type: BuiltinEditorType | string,
     instance: Record<string, unknown>,
-    options: CreateAdapterOptions = {}
+    options: CreateAdapterOptions = {},
   ): EditorAdapter {
     this.adapter = createBuiltinAdapter({ type, instance }, options);
     return this.adapter;
@@ -33,7 +33,7 @@ export class EditorSwitchboard {
   async switchTo(
     type: BuiltinEditorType | string,
     instance: Record<string, unknown>,
-    options: SyncOptions & CreateAdapterOptions = {}
+    options: SyncOptions & CreateAdapterOptions = {},
   ): Promise<EditorAdapter> {
     const currentHtml = options.preserveCurrentContent === false ? "" : await this.getHtml();
     const nextAdapter = this.connect(type, instance, options);

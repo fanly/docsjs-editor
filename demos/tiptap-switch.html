@@ -44,15 +44,21 @@
         padding: 8px 10px;
         background: #fff;
       }
-      button { cursor: pointer; }
+      button {
+        cursor: pointer;
+      }
       .editor {
         min-height: 250px;
         border: 1px solid #d8e3ef;
         border-radius: 8px;
         padding: 8px;
       }
-      .editor-box { display: none; }
-      .editor-box.active { display: block; }
+      .editor-box {
+        display: none;
+      }
+      .editor-box.active {
+        display: block;
+      }
       .tiptap-host {
         min-height: 220px;
         outline: none;
@@ -71,13 +77,18 @@
   <body>
     <div class="wrap">
       <div class="card">
-        <h2 style="margin: 0 0 8px;">docsjs-editor Tiptap + Quill Switch Demo</h2>
-        <p style="margin: 0; color: #4f6379;">Switch active editor between Tiptap and Quill while preserving content from docsjs snapshot.</p>
+        <h2 style="margin: 0 0 8px">docsjs-editor Tiptap + Quill Switch Demo</h2>
+        <p style="margin: 0; color: #4f6379">
+          Switch active editor between Tiptap and Quill while preserving content from docsjs
+          snapshot.
+        </p>
       </div>
 
       <div class="card">
-        <textarea id="source"><h1>Roadmap</h1><p>Switch editor provider without business rewrite.</p><ul><li>Tiptap integration</li><li>Quill fallback</li><li>docsjs snapshot pipeline</li></ul></textarea>
-        <div class="row" style="margin-top: 10px;">
+        <textarea id="source">
+<h1>Roadmap</h1><p>Switch editor provider without business rewrite.</p><ul><li>Tiptap integration</li><li>Quill fallback</li><li>docsjs snapshot pipeline</li></ul></textarea
+        >
+        <div class="row" style="margin-top: 10px">
           <label for="kind"><strong>Active editor:</strong></label>
           <select id="kind">
             <option value="tiptap">Tiptap</option>
@@ -89,7 +100,9 @@
       </div>
 
       <div class="card editor">
-        <div id="box-tiptap" class="editor-box active"><div id="tiptap-editor" class="tiptap-host"></div></div>
+        <div id="box-tiptap" class="editor-box active">
+          <div id="tiptap-editor" class="tiptap-host"></div>
+        </div>
         <div id="box-quill" class="editor-box"><div id="quill-editor"></div></div>
       </div>
 
@@ -117,7 +130,7 @@
       const tiptap = new Editor({
         element: document.getElementById("tiptap-editor"),
         extensions: [StarterKit],
-        content: "<p>ready</p>"
+        content: "<p>ready</p>",
       });
 
       const quill = new window.Quill("#quill-editor", { theme: "snow" });

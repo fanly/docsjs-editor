@@ -10,7 +10,7 @@ function mockAdapter(name) {
     },
     getHtml() {
       return html;
-    }
+    },
   };
 }
 
@@ -24,29 +24,29 @@ async function run() {
       define() {},
       get() {
         return undefined;
-      }
+      },
     };
   }
 
-  const { EditorSwitchboard, buildCompatibilityReport, applyFallbackPolicy, driftScore } = await import(
-    "../dist/index.js"
-  );
+  const { EditorSwitchboard, buildCompatibilityReport, applyFallbackPolicy, driftScore } =
+    await import("../dist/index.js");
 
-  const sample = "<h1>Release Plan</h1><p>docsjs snapshot.</p><ul><li>Import</li><li>Switch</li><li>Deliver</li></ul><table><tr><td>A</td></tr></table>";
+  const sample =
+    "<h1>Release Plan</h1><p>docsjs snapshot.</p><ul><li>Import</li><li>Switch</li><li>Deliver</li></ul><table><tr><td>A</td></tr></table>";
 
   const board = new EditorSwitchboard();
   const quill = {
     clipboard: {
       dangerouslyPasteHTML(value) {
         quill.__html = value;
-      }
+      },
     },
     root: {
       get innerHTML() {
         return quill.__html || "";
-      }
+      },
     },
-    __html: ""
+    __html: "",
   };
 
   const ck = {
@@ -56,7 +56,7 @@ async function run() {
     },
     getData() {
       return ck.__html;
-    }
+    },
   };
 
   const tiny = {
@@ -66,7 +66,7 @@ async function run() {
     },
     getContent() {
       return tiny.__html;
-    }
+    },
   };
 
   const lexical = mockAdapter("lexical");
@@ -94,13 +94,17 @@ async function run() {
     compatibilityScore: report.score,
     unsupportedBlocks: report.unsupported,
     driftScore: driftScore(sample, output),
-    generatedAt: new Date().toISOString()
+    generatedAt: new Date().toISOString(),
   };
 
   const outDir = resolve(process.cwd(), "artifacts");
   mkdirSync(outDir, { recursive: true });
   const outFile = resolve(outDir, "benchmark-switchboard.json");
-  writeFileSync(outFile, `${JSON.stringify({ ...result, outputFile: outFile }, null, 2)}\n`, "utf8");
+  writeFileSync(
+    outFile,
+    `${JSON.stringify({ ...result, outputFile: outFile }, null, 2)}\n`,
+    "utf8",
+  );
 
   console.log("docsjs-editor switchboard benchmark");
   console.log(JSON.stringify({ ...result, outputFile: outFile }, null, 2));

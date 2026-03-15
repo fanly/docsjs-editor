@@ -7,14 +7,14 @@ createApp({
       source: "<h1>Vue Vite</h1><p>docsjs-editor quickstart.</p>",
       active: "quill",
       output: "",
-      board: new EditorSwitchboard()
+      board: new EditorSwitchboard(),
     };
   },
   methods: {
     async switchEditor(_next: string) {
       // Wire your editor instances and call:
       // await this.board.switchTo(next, instance)
-    }
+    },
   },
   template: `
     <main style="padding:20px;font-family:Segoe UI;">
@@ -29,5 +29,5 @@ createApp({
       </div>
       <pre>{{ output }}</pre>
     </main>
-  `
+  `,
 }).mount("#app");

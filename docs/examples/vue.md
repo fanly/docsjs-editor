@@ -18,9 +18,7 @@ const handleImportDocsJS = async (html: string) => {
 
 <template>
   <div>
-    <button @click="switchTo('quill', quillRef)">
-      Switch to Quill
-    </button>
+    <button @click="switchTo('quill', quillRef)">Switch to Quill</button>
   </div>
 </template>
 ```
@@ -32,11 +30,8 @@ const handleImportDocsJS = async (html: string) => {
 import { bindDocsjsChangeToEditor } from "@docsjs-editor/vue";
 
 onMounted(() => {
-  const unbind = bindDocsjsChangeToEditor(
-    docsWordElement,
-    tiptapEditor
-  );
-  
+  const unbind = bindDocsjsChangeToEditor(docsWordElement, tiptapEditor);
+
   onUnmounted(unbind);
 });
 </script>

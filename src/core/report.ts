@@ -25,7 +25,7 @@ const COMMON_UNSUPPORTED: Record<string, string> = {
   math: "MathML/OMML blocks usually require plugin support",
   svg: "Vector content may not be editable in rich text models",
   iframe: "Embedded frame is often blocked by editor sanitizers",
-  video: "Video nodes may be converted to links or placeholders"
+  video: "Video nodes may be converted to links or placeholders",
 };
 
 const EDITOR_OVERRIDES: Record<string, Partial<Record<string, FallbackAction>>> = {
@@ -33,22 +33,22 @@ const EDITOR_OVERRIDES: Record<string, Partial<Record<string, FallbackAction>>> 
     table: "replace-with-paragraph",
     math: "replace-with-code",
     iframe: "strip",
-    video: "replace-with-paragraph"
+    video: "replace-with-paragraph",
   },
   ckeditor5: {
     math: "replace-with-code",
-    iframe: "strip"
+    iframe: "strip",
   },
   tinymce: {
-    iframe: "strip"
+    iframe: "strip",
   },
   "toast-ui": {
     iframe: "strip",
-    svg: "replace-with-code"
+    svg: "replace-with-code",
   },
   tiptap: {
-    math: "replace-with-code"
-  }
+    math: "replace-with-code",
+  },
 };
 
 const DEFAULT_ACTIONS: Record<string, FallbackAction> = {
@@ -56,7 +56,7 @@ const DEFAULT_ACTIONS: Record<string, FallbackAction> = {
   math: "replace-with-code",
   svg: "replace-with-code",
   table: "replace-with-paragraph",
-  video: "replace-with-paragraph"
+  video: "replace-with-paragraph",
 };
 
 function countTag(html: string, tag: string): number {
@@ -65,14 +65,18 @@ function countTag(html: string, tag: string): number {
   return matches ? matches.length : 0;
 }
 
-function resolveAction(editor: string, tag: string, config: FallbackPolicyConfig = {}): FallbackAction {
+function resolveAction(
+  editor: string,
+  tag: string,
+  config: FallbackPolicyConfig = {},
+): FallbackAction {
   const mergedOverrides = {
     ...EDITOR_OVERRIDES,
-    ...(config.editorOverrides ?? {})
+    ...config.editorOverrides,
   };
   const mergedDefaults = {
     ...DEFAULT_ACTIONS,
-    ...(config.defaultActions ?? {})
+    ...config.defaultActions,
   };
 
   const override = mergedOverrides[editor]?.[tag];
@@ -84,7 +88,7 @@ function resolveAction(editor: string, tag: string, config: FallbackPolicyConfig
 export function buildCompatibilityReport(
   html: string,
   editor: BuiltinEditorType | string,
-  config: FallbackPolicyConfig = {}
+  config: FallbackPolicyConfig = {},
 ): CompatibilityReport {
   const unsupported: UnsupportedBlock[] = [];
 
@@ -95,7 +99,7 @@ export function buildCompatibilityReport(
         tag,
         count,
         reason,
-        action: resolveAction(editor, tag, config)
+        action: resolveAction(editor, tag, config),
       });
     }
   }
@@ -106,14 +110,11 @@ export function buildCompatibilityReport(
   return {
     editor,
     score,
-    unsupported
+    unsupported,
   };
 }
 
-export function applyFallbackPolicy(
-  html: string,
-  report: CompatibilityReport
-): string {
+export function applyFallbackPolicy(html: string, report: CompatibilityReport): string {
   let output = html;
 
   for (const item of report.unsupported) {
@@ -127,13 +128,19 @@ export function applyFallbackPolicy(
 
     if (item.action === "replace-with-paragraph") {
       const replaceRegex = new RegExp(`<${item.tag}[^>]*>[\\s\\S]*?<\\/${item.tag}>`, "gi");
-      output = output.replace(replaceRegex, `<p>[${item.tag} omitted for editor compatibility]</p>`);
+      output = output.replace(
+        replaceRegex,
+        `<p>[${item.tag} omitted for editor compatibility]</p>`,
+      );
       continue;
     }
 
     if (item.action === "replace-with-code") {
       const replaceRegex = new RegExp(`<${item.tag}[^>]*>[\\s\\S]*?<\\/${item.tag}>`, "gi");
-      output = output.replace(replaceRegex, `<pre><code>[${item.tag} content omitted for editor compatibility]</code></pre>`);
+      output = output.replace(
+        replaceRegex,
+        `<pre><code>[${item.tag} content omitted for editor compatibility]</code></pre>`,
+      );
     }
   }
 

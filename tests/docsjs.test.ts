@@ -1,10 +1,14 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vite-plus/test";
 
 vi.mock("@coding01/docsjs", () => ({
-  parseDocxToHtmlSnapshot: vi.fn(async () => ({ htmlSnapshot: "<h1>from-docx</h1>" }))
+  parseDocxToHtmlSnapshot: vi.fn(async () => ({ htmlSnapshot: "<h1>from-docx</h1>" })),
 }));
 
-import { bindDocsjsChangeToEditor, importDocxToEditor, importHtmlSnapshotToEditor } from "../src/docsjs";
+import {
+  bindDocsjsChangeToEditor,
+  importDocxToEditor,
+  importHtmlSnapshotToEditor,
+} from "../src/docsjs";
 
 describe("docsjs bridge", () => {
   it("imports html snapshot into adapter", async () => {
@@ -14,7 +18,7 @@ describe("docsjs bridge", () => {
       setHtml: async (value: string) => {
         html = value;
       },
-      getHtml: async () => html
+      getHtml: async () => html,
     };
 
     await importHtmlSnapshotToEditor("<p>snapshot</p>", adapter);
@@ -28,7 +32,7 @@ describe("docsjs bridge", () => {
       setHtml: async (value: string) => {
         html = value;
       },
-      getHtml: async () => html
+      getHtml: async () => html,
     };
 
     const file = new File(["demo"], "demo.docx");
@@ -45,7 +49,7 @@ describe("docsjs bridge", () => {
       setHtml: async (value: string) => {
         html = value;
       },
-      getHtml: async () => html
+      getHtml: async () => html,
     };
 
     const listeners = new Map<string, (event: Event) => void>();
@@ -55,7 +59,7 @@ describe("docsjs bridge", () => {
       },
       removeEventListener: (name: "docsjs-change") => {
         listeners.delete(name);
-      }
+      },
     };
 
     const unbind = bindDocsjsChangeToEditor(host, adapter);

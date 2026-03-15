@@ -25,7 +25,11 @@ function App() {
     <main style={{ padding: 20, fontFamily: "Segoe UI" }}>
       <h2>docsjs-editor React Vite Demo (Template)</h2>
       <p>Wire your real editor instances, keep business API unchanged via switchboard.</p>
-      <textarea value={source} onChange={(e) => setSource(e.target.value)} style={{ width: "100%", minHeight: 120 }} />
+      <textarea
+        value={source}
+        onChange={(e) => setSource(e.target.value)}
+        style={{ width: "100%", minHeight: 120 }}
+      />
       <div style={{ marginTop: 10 }}>
         <select value={active} onChange={(e) => onSwitch(e.target.value)}>
           <option value="quill">Quill</option>

@@ -29,7 +29,7 @@ html.dark {
 }
 
 .vp-doc h1 {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 /* Stats Bar */
@@ -50,7 +50,7 @@ html.dark {
   font-size: 32px;
   font-weight: 700;
   color: var(--docsjs-brand);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .stat-label {
@@ -330,11 +330,11 @@ html.dark {
   .framework-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .ecosystem-flow {
     flex-direction: column;
   }
-  
+
   .eco-arrow {
     transform: rotate(90deg);
   }

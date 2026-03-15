@@ -91,4 +91,3 @@ If coverage plugin is missing, install a version compatible with current vitest 
 
 - `docs/PRODUCT_AUDIT_REPORT.md`
 - Optional dated copy: `docs/PRODUCT_AUDIT_REPORT_YYYY-MM-DD.md`
-

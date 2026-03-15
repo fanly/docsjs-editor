@@ -9,16 +9,14 @@ import { useEditor } from "@tiptap/react";
 function EditorComponent() {
   const editor = useEditor({ extensions: [StarterKit] });
   const { setHtml, switchTo } = useEditorSwitchboard();
-  
+
   const handleImportDocsJS = async (html: string) => {
     await setHtml(html);
   };
-  
+
   return (
     <div>
-      <button onClick={() => switchTo("quill", quillRef)}>
-        切换到 Quill
-      </button>
+      <button onClick={() => switchTo("quill", quillRef)}>切换到 Quill</button>
     </div>
   );
 }
@@ -32,17 +30,14 @@ import { bindDocsjsChangeToEditor } from "@coding01/docsjs-editor/react";
 function DocsJSEditorWrapper() {
   const docsRef = useRef(null);
   const editorRef = useRef(null);
-  
+
   useEffect(() => {
     if (docsRef.current && editorRef.current) {
-      const unbind = bindDocsjsChangeToEditor(
-        docsRef.current,
-        editorRef.current
-      );
+      const unbind = bindDocsjsChangeToEditor(docsRef.current, editorRef.current);
       return unbind;
     }
   }, []);
-  
+
   return (
     <div>
       <docs-word-editor ref={docsRef} />

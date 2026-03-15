@@ -88,6 +88,7 @@ await switchboard.setHtml(canonicalHtml);
 ```
 
 **Left: docsjs HTML snapshot**
+
 ```
 <h1>Quarter Plan</h1>
 <p>One source content rendered across multiple editor engines.</p>
@@ -99,6 +100,7 @@ await switchboard.setHtml(canonicalHtml);
 ```
 
 **Right: same content after adapter switch**
+
 ```
 {
   "activeEditor": "quill",
@@ -119,8 +121,8 @@ await switchboard.setHtml(canonicalHtml);
 ## Engineering Trust Signals
 
 - **CI**: Push to main: run verify quality gate.
-- **npm**: Push tag v*.*.*: publish npm package.
-- **Pages**: Update docs/** on main: deploy landing page.
+- **npm**: Push tag v*.*.\*: publish npm package.
+- **Pages**: Update docs/\*\* on main: deploy landing page.
 
 ## Recommended Ecosystem Path
 
@@ -169,10 +171,10 @@ await switchboard.switchTo("quill", quillEditor);
 
 ## Ecosystem
 
-| Package | Description |
-|---------|-------------|
-| [DocsJS](https://docsjs.coding01.cn) | High-fidelity Word/DOCX import |
-| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown output conversion |
+| Package                                                     | Description                    |
+| ----------------------------------------------------------- | ------------------------------ |
+| [DocsJS](https://docsjs.coding01.cn)                        | High-fidelity Word/DOCX import |
+| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown output conversion     |
 
 ## Sponsors
 

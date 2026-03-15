@@ -30,115 +30,324 @@
         --brand-strong: #0b5ca2;
       }
 
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         color: var(--ink);
         background: var(--bg);
-        font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-family:
+          "Outfit",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         line-height: 1.6;
       }
-      .container { width: min(1200px, 92vw); margin: 0 auto; }
+      .container {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+      }
 
       .nav {
-        position: sticky; top: 0; z-index: 100;
+        position: sticky;
+        top: 0;
+        z-index: 100;
         background: rgba(247, 251, 255, 0.95);
         backdrop-filter: blur(8px);
         border-bottom: 1px solid var(--line);
       }
-      .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-      .nav-left { display: flex; align-items: center; gap: 30px; }
-      .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-weight: 800; }
-      .logo-icon {
-        width: 30px; height: 30px; border-radius: 9px;
-        background: linear-gradient(145deg, var(--brand), #3f9ef0);
-        color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800;
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
       }
-      .nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; }
-      .nav-links a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; }
-      .nav-links a:hover, .nav-links a.active { color: var(--brand); }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--ink);
+        font-weight: 800;
+      }
+      .logo-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: linear-gradient(145deg, var(--brand), #3f9ef0);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+      }
+      .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--brand);
+      }
 
       .lang-btn {
-        border: 1px solid var(--line); background: #fff; border-radius: 7px;
-        padding: 6px 12px; font-size: 13px; cursor: pointer;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 7px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: pointer;
       }
-      .lang-btn.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+      .lang-btn.active {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+      }
 
       .hero {
-        text-align: center; padding: 82px 0 58px;
-        background: radial-gradient(circle at 12% 20%, #dcedff 0%, transparent 34%),
+        text-align: center;
+        padding: 82px 0 58px;
+        background:
+          radial-gradient(circle at 12% 20%, #dcedff 0%, transparent 34%),
           radial-gradient(circle at 86% 12%, #d6f4ff 0%, transparent 30%),
           linear-gradient(180deg, #f2f8ff 0%, #f7fbff 100%);
       }
-      .hero h1 { margin: 0 0 14px; font-size: clamp(38px, 6vw, 60px); line-height: 1.06; }
-      .hero h1 span { color: var(--brand); }
-      .hero p { max-width: 700px; margin: 0 auto 28px; color: var(--muted); font-size: clamp(16px, 2vw, 20px); }
+      .hero h1 {
+        margin: 0 0 14px;
+        font-size: clamp(38px, 6vw, 60px);
+        line-height: 1.06;
+      }
+      .hero h1 span {
+        color: var(--brand);
+      }
+      .hero p {
+        max-width: 700px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: clamp(16px, 2vw, 20px);
+      }
 
-      .hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .hero-cta {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
       .btn {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 12px 20px; border-radius: 9px; font-weight: 700; font-size: 14px;
-        text-decoration: none; border: 1px solid var(--line);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border-radius: 9px;
+        font-weight: 700;
+        font-size: 14px;
+        text-decoration: none;
+        border: 1px solid var(--line);
       }
-      .btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
-      .btn-primary:hover { background: var(--brand-strong); }
-      .btn-secondary { background: #fff; color: var(--ink); }
-      .btn-secondary:hover { color: var(--brand); border-color: var(--brand); }
-
-      .stats-bar { display: flex; justify-content: center; gap: 34px; flex-wrap: wrap; padding-top: 24px; }
-      .stat-item { text-align: center; }
-      .stat-value { font-size: 26px; font-weight: 800; }
-      .stat-label { font-size: 13px; color: var(--muted); }
-
-      .features, .showcase, .api-section, .release, .sponsors { padding: 60px 0; }
-      .features, .release { background: var(--bg-alt); }
-      .features h2, .showcase h2, .api-section h2, .release h2, .sponsors h2 {
-        margin: 0 0 42px; text-align: center; font-size: 32px;
+      .btn-primary {
+        background: var(--brand);
+        color: #fff;
+        border-color: var(--brand);
+      }
+      .btn-primary:hover {
+        background: var(--brand-strong);
+      }
+      .btn-secondary {
+        background: #fff;
+        color: var(--ink);
+      }
+      .btn-secondary:hover {
+        color: var(--brand);
+        border-color: var(--brand);
       }
 
-      .feature-grid, .api-grid, .release-grid {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
+      .stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 34px;
+        flex-wrap: wrap;
+        padding-top: 24px;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 26px;
+        font-weight: 800;
+      }
+      .stat-label {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .features,
+      .showcase,
+      .api-section,
+      .release,
+      .sponsors {
+        padding: 60px 0;
+      }
+      .features,
+      .release {
+        background: var(--bg-alt);
+      }
+      .features h2,
+      .showcase h2,
+      .api-section h2,
+      .release h2,
+      .sponsors h2 {
+        margin: 0 0 42px;
+        text-align: center;
+        font-size: 32px;
+      }
+
+      .feature-grid,
+      .api-grid,
+      .release-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
       }
       .card {
-        border: 1px solid var(--line); border-radius: 14px; background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
         padding: 22px;
       }
-      .card h3 { margin: 0 0 8px; font-size: 18px; }
-      .card p { margin: 0; color: var(--muted); font-size: 14px; }
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
 
       .code-window {
-        background: #141821; border-radius: 12px; overflow: hidden;
-        max-width: 860px; margin: 0 auto;
+        background: #141821;
+        border-radius: 12px;
+        overflow: hidden;
+        max-width: 860px;
+        margin: 0 auto;
       }
-      .code-header { display: flex; gap: 6px; padding: 12px 16px; background: #242c3a; }
-      .code-dot { width: 11px; height: 11px; border-radius: 50%; }
-      .code-dot:nth-child(1) { background: #ff5f56; }
-      .code-dot:nth-child(2) { background: #ffbd2e; }
-      .code-dot:nth-child(3) { background: #27ca40; }
-      .code-content { padding: 20px; overflow-x: auto; }
-      .code-content pre, .code-content code, .compare pre, .compare code {
-        margin: 0; color: #dfe6ee; font-family: "JetBrains Mono", monospace; font-size: 13px; line-height: 1.7;
+      .code-header {
+        display: flex;
+        gap: 6px;
+        padding: 12px 16px;
+        background: #242c3a;
+      }
+      .code-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+      .code-dot:nth-child(1) {
+        background: #ff5f56;
+      }
+      .code-dot:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .code-dot:nth-child(3) {
+        background: #27ca40;
+      }
+      .code-content {
+        padding: 20px;
+        overflow-x: auto;
+      }
+      .code-content pre,
+      .code-content code,
+      .compare pre,
+      .compare code {
+        margin: 0;
+        color: #dfe6ee;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.7;
       }
 
-      .compare { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-      .panel { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-      .panel-title { background: #edf5ff; border-bottom: 1px solid var(--line); padding: 10px 12px; font-size: 13px; font-weight: 700; }
-      .panel-body { background: #171d28; padding: 14px; }
+      .compare {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .panel-title {
+        background: #edf5ff;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 12px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .panel-body {
+        background: #171d28;
+        padding: 14px;
+      }
 
-      .sponsors p { text-align: center; color: var(--muted); margin: 0 0 18px; }
-      .sponsor-logos { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .sponsors p {
+        text-align: center;
+        color: var(--muted);
+        margin: 0 0 18px;
+      }
+      .sponsor-logos {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
       .sponsor-logo {
-        border: 1px solid var(--line); border-radius: 999px; background: #fff;
-        padding: 8px 14px; font-size: 13px; color: var(--muted); font-weight: 700;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        padding: 8px 14px;
+        font-size: 13px;
+        color: var(--muted);
+        font-weight: 700;
       }
 
-      .footer { padding: 30px 0; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 14px; }
-      .footer a { color: var(--brand); text-decoration: none; }
-      .footer a:hover { text-decoration: underline; }
+      .footer {
+        padding: 30px 0;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .footer a {
+        color: var(--brand);
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
 
       @media (max-width: 860px) {
-        .nav-links { display: none; }
-        .compare { grid-template-columns: 1fr; }
+        .nav-links {
+          display: none;
+        }
+        .compare {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -164,18 +373,51 @@
     <section class="hero">
       <div class="container">
         <h1 data-i18n="heroTitle">One <span>Bridge</span> For Mainstream Editors</h1>
-        <p data-i18n="heroLead">Run one canonical docsjs content stream across mainstream editors, switch providers at runtime, and keep business APIs unchanged.</p>
+        <p data-i18n="heroLead">
+          Run one canonical docsjs content stream across mainstream editors, switch providers at
+          runtime, and keep business APIs unchanged.
+        </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="https://www.npmjs.com/package/@coding01/docsjs-editor" target="_blank" data-i18n="ctaNpm">Get Package</a>
-          <a class="btn btn-secondary" href="https://docsjs.coding01.cn/" target="_blank" data-i18n="ctaDocsjs">Use with docsjs</a>
+          <a
+            class="btn btn-primary"
+            href="https://www.npmjs.com/package/@coding01/docsjs-editor"
+            target="_blank"
+            data-i18n="ctaNpm"
+            >Get Package</a
+          >
+          <a
+            class="btn btn-secondary"
+            href="https://docsjs.coding01.cn/"
+            target="_blank"
+            data-i18n="ctaDocsjs"
+            >Use with docsjs</a
+          >
           <a class="btn btn-secondary" href="#showcase" data-i18n="ctaDemo">View Case</a>
-          <a class="btn btn-secondary" href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="ctaFiveDemo">Try 5-Editor Demo</a>
+          <a
+            class="btn btn-secondary"
+            href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html"
+            target="_blank"
+            data-i18n="ctaFiveDemo"
+            >Try 5-Editor Demo</a
+          >
         </div>
         <div class="stats-bar">
-          <div class="stat-item"><div class="stat-value">9</div><div class="stat-label" data-i18n="statEditors">Mainstream Editors</div></div>
-          <div class="stat-item"><div class="stat-value">1</div><div class="stat-label" data-i18n="statApi">Business API</div></div>
-          <div class="stat-item"><div class="stat-value">Runtime</div><div class="stat-label" data-i18n="statSwitch">Provider Switch</div></div>
-          <div class="stat-item"><div class="stat-value">MIT</div><div class="stat-label" data-i18n="statLicense">Open Source</div></div>
+          <div class="stat-item">
+            <div class="stat-value">9</div>
+            <div class="stat-label" data-i18n="statEditors">Mainstream Editors</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">1</div>
+            <div class="stat-label" data-i18n="statApi">Business API</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Runtime</div>
+            <div class="stat-label" data-i18n="statSwitch">Provider Switch</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">MIT</div>
+            <div class="stat-label" data-i18n="statLicense">Open Source</div>
+          </div>
         </div>
       </div>
     </section>
@@ -186,23 +428,38 @@
         <div class="feature-grid">
           <article class="card">
             <h3 data-i18n="f1Title">Mainstream Coverage</h3>
-            <p data-i18n="f1Desc">Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.</p>
+            <p data-i18n="f1Desc">
+              Built-in adapters cover mainstream editors first, with extensible hooks for Lexical,
+              Slate, and ProseMirror stacks.
+            </p>
           </article>
           <article class="card">
             <h3 data-i18n="f2Title">Switchboard Runtime</h3>
-            <p data-i18n="f2Desc">Switch editor providers at runtime while preserving content and avoiding integration rewrites.</p>
+            <p data-i18n="f2Desc">
+              Switch editor providers at runtime while preserving content and avoiding integration
+              rewrites.
+            </p>
           </article>
           <article class="card">
             <h3 data-i18n="f3Title">docsjs Native Bridge</h3>
-            <p data-i18n="f3Desc">Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.</p>
+            <p data-i18n="f3Desc">
+              Connect docsjs snapshots directly into target editors so import and editing stay in
+              one technical path.
+            </p>
           </article>
           <article class="card">
             <h3 data-i18n="f4Title">Ecosystem Pairing</h3>
-            <p data-i18n="f4Desc">Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.</p>
+            <p data-i18n="f4Desc">
+              Pair with docsjs as a canonical source and keep one content stream consistent across
+              multiple editor providers.
+            </p>
           </article>
           <article class="card">
             <h3 data-i18n="f5Title">Demo & Matrix Ready</h3>
-            <p data-i18n="f5Desc">Use demos and capability matrix to choose editor stacks faster and reduce migration risk.</p>
+            <p data-i18n="f5Desc">
+              Use demos and capability matrix to choose editor stacks faster and reduce migration
+              risk.
+            </p>
           </article>
         </div>
       </div>
@@ -214,18 +471,45 @@
         <div class="api-grid">
           <div class="card">
             <h3 data-i18n="quickReactTitle">React</h3>
-            <p data-i18n="quickReactDesc">Runtime switch demo with one docsjs content source and two editor providers.</p>
-            <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html" target="_blank" data-i18n="quickReactLink">Open React demo</a></p>
+            <p data-i18n="quickReactDesc">
+              Runtime switch demo with one docsjs content source and two editor providers.
+            </p>
+            <p>
+              <a
+                href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html"
+                target="_blank"
+                data-i18n="quickReactLink"
+                >Open React demo</a
+              >
+            </p>
           </div>
           <div class="card">
             <h3 data-i18n="quickVueTitle">Vue</h3>
-            <p data-i18n="quickVueDesc">Vue state-driven provider switching with consistent content behavior.</p>
-            <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html" target="_blank" data-i18n="quickVueLink">Open Vue demo</a></p>
+            <p data-i18n="quickVueDesc">
+              Vue state-driven provider switching with consistent content behavior.
+            </p>
+            <p>
+              <a
+                href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html"
+                target="_blank"
+                data-i18n="quickVueLink"
+                >Open Vue demo</a
+              >
+            </p>
           </div>
           <div class="card">
             <h3 data-i18n="quickVanillaTitle">Vanilla / CDN</h3>
-            <p data-i18n="quickVanillaDesc">5-editor panel to benchmark integration effort before committing a stack.</p>
-            <p><a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="quickVanillaLink">Open 5-editor demo</a></p>
+            <p data-i18n="quickVanillaDesc">
+              5-editor panel to benchmark integration effort before committing a stack.
+            </p>
+            <p>
+              <a
+                href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html"
+                target="_blank"
+                data-i18n="quickVanillaLink"
+                >Open 5-editor demo</a
+              >
+            </p>
           </div>
         </div>
       </div>
@@ -235,7 +519,10 @@
       <div class="container">
         <h2 data-i18n="showcaseTitle">Complete Case: One content, multiple editor adapters</h2>
         <div class="code-window">
-          <div class="code-header"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+          <div class="code-header">
+            <span class="code-dot"></span><span class="code-dot"></span
+            ><span class="code-dot"></span>
+          </div>
           <div class="code-content">
             <pre><code class="language-ts">import { EditorSwitchboard } from "@coding01/docsjs-editor";
 
@@ -260,24 +547,30 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
         <div class="compare">
           <div class="panel">
             <div class="panel-title" data-i18n="leftTitle">Left: docsjs HTML snapshot</div>
-            <div class="panel-body"><pre><code class="language-markup">&lt;h1&gt;Quarter Plan&lt;/h1&gt;
+            <div class="panel-body">
+              <pre><code class="language-markup">&lt;h1&gt;Quarter Plan&lt;/h1&gt;
 &lt;p&gt;One source content rendered across multiple editor engines.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;DOCX fidelity import&lt;/li&gt;
   &lt;li&gt;Editor runtime switch&lt;/li&gt;
   &lt;li&gt;Content parity checks&lt;/li&gt;
-&lt;/ul&gt;</code></pre></div>
+&lt;/ul&gt;</code></pre>
+            </div>
           </div>
           <div class="panel">
-            <div class="panel-title" data-i18n="rightTitle">Right: same content after adapter switch</div>
-            <div class="panel-body"><pre><code class="language-json">{
+            <div class="panel-title" data-i18n="rightTitle">
+              Right: same content after adapter switch
+            </div>
+            <div class="panel-body">
+              <pre><code class="language-json">{
   "activeEditor": "quill",
   "source": "docsjs snapshot",
   "sameHeading": true,
   "sameListCount": 3,
   "parityCheck": "pass",
   "preview": "Quarter Plan | DOCX fidelity import | Editor runtime switch | Content parity checks"
-}</code></pre></div>
+}</code></pre>
+            </div>
           </div>
         </div>
       </div>
@@ -287,9 +580,21 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
       <div class="container">
         <h2 data-i18n="apiTitle">API Reference</h2>
         <div class="api-grid">
-          <div class="card"><h3 data-i18n="apiCore">Switchboard</h3><p><code>connect()</code> / <code>switchTo()</code> / <code>setHtml()</code> / <code>getHtml()</code></p></div>
-          <div class="card"><h3 data-i18n="apiBridge">docsjs Bridge</h3><p><code>bindDocsjsChangeToEditor()</code> / <code>importDocxToEditor()</code></p></div>
-          <div class="card"><h3 data-i18n="apiAdapters">Adapters</h3><p><code>createBuiltinAdapter()</code> with mainstream editor types</p></div>
+          <div class="card">
+            <h3 data-i18n="apiCore">Switchboard</h3>
+            <p>
+              <code>connect()</code> / <code>switchTo()</code> / <code>setHtml()</code> /
+              <code>getHtml()</code>
+            </p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="apiBridge">docsjs Bridge</h3>
+            <p><code>bindDocsjsChangeToEditor()</code> / <code>importDocxToEditor()</code></p>
+          </div>
+          <div class="card">
+            <h3 data-i18n="apiAdapters">Adapters</h3>
+            <p><code>createBuiltinAdapter()</code> with mainstream editor types</p>
+          </div>
         </div>
       </div>
     </section>
@@ -298,9 +603,18 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
       <div class="container">
         <h2 data-i18n="releaseTitle">Engineering Trust Signals</h2>
         <div class="release-grid">
-          <div class="card"><h3>CI</h3><p data-i18n="r1">Push to <code>main</code>: run verify quality gate.</p></div>
-          <div class="card"><h3>npm</h3><p data-i18n="r2">Push tag <code>v*.*.*</code>: publish npm package.</p></div>
-          <div class="card"><h3>Pages</h3><p data-i18n="r3">Update <code>docs/**</code> on main: deploy landing page.</p></div>
+          <div class="card">
+            <h3>CI</h3>
+            <p data-i18n="r1">Push to <code>main</code>: run verify quality gate.</p>
+          </div>
+          <div class="card">
+            <h3>npm</h3>
+            <p data-i18n="r2">Push tag <code>v*.*.*</code>: publish npm package.</p>
+          </div>
+          <div class="card">
+            <h3>Pages</h3>
+            <p data-i18n="r3">Update <code>docs/**</code> on main: deploy landing page.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -308,8 +622,46 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
     <section class="sponsors">
       <div class="container">
         <h2 data-i18n="ecoTitle">Recommended Ecosystem Path</h2>
-        <p data-i18n="ecoDesc">Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.</p>
-        <p><a href="https://github.com/fanly/docsjs-editor/tree/main/demos" target="_blank" data-i18n="demoLink">Open demos</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html" target="_blank" data-i18n="fiveDemoLink">Try 5-editor demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html" target="_blank" data-i18n="reactDemoLink">React demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html" target="_blank" data-i18n="vueDemoLink">Vue demo</a> · <a href="https://github.com/fanly/docsjs-editor/blob/main/docs/EDITOR_CAPABILITY_MATRIX.md" target="_blank" data-i18n="matrixLink">Open capability matrix</a></p>
+        <p data-i18n="ecoDesc">
+          Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and
+          docsjs-markdown for final markdown delivery.
+        </p>
+        <p>
+          <a
+            href="https://github.com/fanly/docsjs-editor/tree/main/demos"
+            target="_blank"
+            data-i18n="demoLink"
+            >Open demos</a
+          >
+          ·
+          <a
+            href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html"
+            target="_blank"
+            data-i18n="fiveDemoLink"
+            >Try 5-editor demo</a
+          >
+          ·
+          <a
+            href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html"
+            target="_blank"
+            data-i18n="reactDemoLink"
+            >React demo</a
+          >
+          ·
+          <a
+            href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html"
+            target="_blank"
+            data-i18n="vueDemoLink"
+            >Vue demo</a
+          >
+          ·
+          <a
+            href="https://github.com/fanly/docsjs-editor/blob/main/docs/EDITOR_CAPABILITY_MATRIX.md"
+            target="_blank"
+            data-i18n="matrixLink"
+            >Open capability matrix</a
+          >
+        </p>
         <div class="sponsor-logos">
           <span class="sponsor-logo">@coding01/docsjs</span>
           <span class="sponsor-logo">@coding01/docsjs-editor</span>
@@ -340,7 +692,8 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
       const i18n = {
         en: {
           heroTitle: "One Bridge For Mainstream Editors",
-          heroLead: "Run one canonical docsjs content stream across mainstream editors, switch providers at runtime, and keep business APIs unchanged.",
+          heroLead:
+            "Run one canonical docsjs content stream across mainstream editors, switch providers at runtime, and keep business APIs unchanged.",
           ctaNpm: "Get Package",
           ctaDocsjs: "Use with docsjs",
           ctaDemo: "View Case",
@@ -351,25 +704,32 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           statLicense: "Open Source",
           quickTitle: "Framework Quick Start",
           quickReactTitle: "React",
-          quickReactDesc: "Runtime switch demo with one docsjs content source and two editor providers.",
+          quickReactDesc:
+            "Runtime switch demo with one docsjs content source and two editor providers.",
           quickReactLink: "Open React demo",
           quickVueTitle: "Vue",
           quickVueDesc: "Vue state-driven provider switching with consistent content behavior.",
           quickVueLink: "Open Vue demo",
           quickVanillaTitle: "Vanilla / CDN",
-          quickVanillaDesc: "5-editor panel to benchmark integration effort before committing a stack.",
+          quickVanillaDesc:
+            "5-editor panel to benchmark integration effort before committing a stack.",
           quickVanillaLink: "Open 5-editor demo",
           featuresTitle: "Why docsjs-editor?",
           f1Title: "Mainstream Coverage",
-          f1Desc: "Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.",
+          f1Desc:
+            "Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.",
           f2Title: "Switchboard Runtime",
-          f2Desc: "Switch editor providers at runtime while preserving content and avoiding integration rewrites.",
+          f2Desc:
+            "Switch editor providers at runtime while preserving content and avoiding integration rewrites.",
           f3Title: "docsjs Native Bridge",
-          f3Desc: "Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.",
+          f3Desc:
+            "Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.",
           f4Title: "Ecosystem Pairing",
-          f4Desc: "Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.",
+          f4Desc:
+            "Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.",
           f5Title: "Demo & Matrix Ready",
-          f5Desc: "Use demos and capability matrix to choose editor stacks faster and reduce migration risk.",
+          f5Desc:
+            "Use demos and capability matrix to choose editor stacks faster and reduce migration risk.",
           showcaseTitle: "Complete Case: One content, multiple editor adapters",
           leftTitle: "Left: docsjs HTML snapshot",
           rightTitle: "Right: same content after adapter switch",
@@ -382,16 +742,18 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           r2: "Push tag v*.*.*: publish npm package.",
           r3: "Update docs/** on main: deploy landing page.",
           ecoTitle: "Recommended Ecosystem Path",
-          ecoDesc: "Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.",
+          ecoDesc:
+            "Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.",
           demoLink: "Open demos",
           fiveDemoLink: "Try 5-editor demo",
           reactDemoLink: "React demo",
           vueDemoLink: "Vue demo",
-          matrixLink: "Open capability matrix"
+          matrixLink: "Open capability matrix",
         },
         zh: {
           heroTitle: "一套桥接，接入主流编辑器",
-          heroLead: "基于 docsjs 的同一内容源接入主流编辑器，在运行时切换提供方，同时保持业务 API 不变。",
+          heroLead:
+            "基于 docsjs 的同一内容源接入主流编辑器，在运行时切换提供方，同时保持业务 API 不变。",
           ctaNpm: "查看包",
           ctaDocsjs: "配套 docsjs",
           ctaDemo: "查看案例",
@@ -418,7 +780,8 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           f3Title: "docsjs 原生桥接",
           f3Desc: "直接接入 docsjs 快照，让导入与编辑处理走同一条技术链路。",
           f4Title: "生态联动",
-          f4Desc: "与 docsjs 组合形成规范化内容源，在多个编辑器提供方之间保持同一内容链路与一致性。",
+          f4Desc:
+            "与 docsjs 组合形成规范化内容源，在多个编辑器提供方之间保持同一内容链路与一致性。",
           f5Title: "Demo 与能力矩阵",
           f5Desc: "通过 Demo 与能力矩阵更快完成编辑器选型并降低迁移风险。",
           showcaseTitle: "完整案例：一份内容，多编辑器适配切换",
@@ -433,13 +796,14 @@ await switchboard.setHtml(canonicalHtml);</code></pre>
           r2: "推送 tag v*.*.*：发布 npm 包。",
           r3: "main 分支更新 docs/**：部署单页。",
           ecoTitle: "推荐生态路径",
-          ecoDesc: "docsjs 负责高保真导入，docsjs-editor 负责运行时编辑器切换，docsjs-markdown 负责最终 Markdown 交付。",
+          ecoDesc:
+            "docsjs 负责高保真导入，docsjs-editor 负责运行时编辑器切换，docsjs-markdown 负责最终 Markdown 交付。",
           demoLink: "查看 demos",
           fiveDemoLink: "体验 5 编辑器 Demo",
           reactDemoLink: "React 示例",
           vueDemoLink: "Vue 示例",
-          matrixLink: "查看能力矩阵"
-        }
+          matrixLink: "查看能力矩阵",
+        },
       };
 
       let currentLang = "en";

@@ -1,9 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { applyFallbackPolicy, buildCompatibilityReport } from "../src/core/report";
 
 describe("compatibility report", () => {
   it("builds unsupported block report and score", () => {
-    const html = "<h1>x</h1><table><tr><td>a</td></tr></table><iframe src='x'></iframe><math><mi>x</mi></math>";
+    const html =
+      "<h1>x</h1><table><tr><td>a</td></tr></table><iframe src='x'></iframe><math><mi>x</mi></math>";
     const report = buildCompatibilityReport(html, "quill");
 
     expect(report.editor).toBe("quill");
@@ -14,7 +15,8 @@ describe("compatibility report", () => {
   });
 
   it("applies fallback policy transformations", () => {
-    const html = "<p>a</p><table><tr><td>b</td></tr></table><iframe src='x'></iframe><math>x</math>";
+    const html =
+      "<p>a</p><table><tr><td>b</td></tr></table><iframe src='x'></iframe><math>x</math>";
     const report = buildCompatibilityReport(html, "quill");
     const out = applyFallbackPolicy(html, report);
 
@@ -28,9 +30,9 @@ describe("compatibility report", () => {
     const report = buildCompatibilityReport(html, "quill", {
       editorOverrides: {
         quill: {
-          table: "strip"
-        }
-      }
+          table: "strip",
+        },
+      },
     });
     const out = applyFallbackPolicy(html, report);
 

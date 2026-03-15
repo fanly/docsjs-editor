@@ -9,7 +9,11 @@ export interface BenchmarkResult {
 }
 
 export function normalizeText(html: string): string {
-  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
 }
 
 export function driftScore(sourceHtml: string, outputHtml: string): number {

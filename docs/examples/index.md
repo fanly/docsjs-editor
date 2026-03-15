@@ -10,12 +10,12 @@ The most powerful feature of DocsJS Editor is runtime switching between editors.
 <!-- See demos/multi-switch.html for full demo -->
 <script type="module">
   import { EditorSwitchboard } from "@coding01/docsjs-editor";
-  
+
   const switchboard = new EditorSwitchboard();
-  
+
   // Connect Tiptap
   const tiptapAdapter = switchboard.connect("tiptap", tiptapEditor);
-  
+
   // Later, switch to Quill
   await switchboard.switchTo("quill", quillEditor);
 </script>

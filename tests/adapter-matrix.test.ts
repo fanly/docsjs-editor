@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 import { BUILTIN_EDITOR_TYPES, createBuiltinAdapter } from "../src/adapters/builtin";
 
 describe("builtin adapter matrix", () => {
@@ -12,7 +12,7 @@ describe("builtin adapter matrix", () => {
       "wangeditor",
       "prosemirror",
       "lexical",
-      "slate"
+      "slate",
     ]);
   });
 
@@ -22,10 +22,10 @@ describe("builtin adapter matrix", () => {
       commands: {
         setContent: (value: string) => {
           tiptapHtml = value;
-        }
+        },
       },
       getHTML: () => tiptapHtml,
-      chain: () => ({ focus: () => ({ run: () => undefined }) })
+      chain: () => ({ focus: () => ({ run: () => undefined }) }),
     };
 
     let quillHtml = "";
@@ -33,13 +33,13 @@ describe("builtin adapter matrix", () => {
       clipboard: {
         dangerouslyPasteHTML: (value: string) => {
           quillHtml = value;
-        }
+        },
       },
       root: {
         get innerHTML() {
           return quillHtml;
-        }
-      }
+        },
+      },
     };
 
     let ckHtml = "";
@@ -47,7 +47,7 @@ describe("builtin adapter matrix", () => {
       setData: (value: string) => {
         ckHtml = value;
       },
-      getData: () => ckHtml
+      getData: () => ckHtml,
     };
 
     let tinyHtml = "";
@@ -55,7 +55,7 @@ describe("builtin adapter matrix", () => {
       setContent: (value: string) => {
         tinyHtml = value;
       },
-      getContent: () => tinyHtml
+      getContent: () => tinyHtml,
     };
 
     let toastHtml = "";
@@ -63,7 +63,7 @@ describe("builtin adapter matrix", () => {
       setHTML: (value: string) => {
         toastHtml = value;
       },
-      getHTML: () => toastHtml
+      getHTML: () => toastHtml,
     };
 
     let wangHtml = "";
@@ -71,7 +71,7 @@ describe("builtin adapter matrix", () => {
       setHtml: (value: string) => {
         wangHtml = value;
       },
-      getHtml: () => wangHtml
+      getHtml: () => wangHtml,
     };
 
     let proseHtml = "";
@@ -79,7 +79,7 @@ describe("builtin adapter matrix", () => {
       setHtml: (value: string) => {
         proseHtml = value;
       },
-      getHtml: () => proseHtml
+      getHtml: () => proseHtml,
     };
 
     let lexicalHtml = "";
@@ -87,7 +87,7 @@ describe("builtin adapter matrix", () => {
       setHtml: (value: string) => {
         lexicalHtml = value;
       },
-      getHtml: () => lexicalHtml
+      getHtml: () => lexicalHtml,
     };
 
     let slateHtml = "";
@@ -95,7 +95,7 @@ describe("builtin adapter matrix", () => {
       setHtml: (value: string) => {
         slateHtml = value;
       },
-      getHtml: () => slateHtml
+      getHtml: () => slateHtml,
     };
 
     const cases: Array<{ type: string; instance: Record<string, unknown> }> = [
@@ -107,7 +107,7 @@ describe("builtin adapter matrix", () => {
       { type: "wangeditor", instance: wangeditor as unknown as Record<string, unknown> },
       { type: "prosemirror", instance: prosemirror as unknown as Record<string, unknown> },
       { type: "lexical", instance: lexical as unknown as Record<string, unknown> },
-      { type: "slate", instance: slate as unknown as Record<string, unknown> }
+      { type: "slate", instance: slate as unknown as Record<string, unknown> },
     ];
 
     for (const item of cases) {

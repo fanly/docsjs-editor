@@ -2,13 +2,13 @@
 
 ## Built-in Adapters
 
-| Adapter | Type | Support |
-|---------|------|---------|
-| tiptap | `tiptap` | ✅ Full |
-| quill | `quill` | ✅ Full |
-| ckeditor5 | `ckeditor5` | ✅ Full |
-| tinymce | `tinymce` | ✅ Full |
-| toastui | `toast-ui` | ✅ Full |
+| Adapter    | Type         | Support |
+| ---------- | ------------ | ------- |
+| tiptap     | `tiptap`     | ✅ Full |
+| quill      | `quill`      | ✅ Full |
+| ckeditor5  | `ckeditor5`  | ✅ Full |
+| tinymce    | `tinymce`    | ✅ Full |
+| toastui    | `toast-ui`   | ✅ Full |
 | wangeditor | `wangeditor` | ✅ Full |
 
 ## Creating Custom Adapters
@@ -21,7 +21,7 @@ const customAdapter: EditorAdapter = createBuiltinAdapter(
   {
     getHtml: () => myEditor.getHTML(),
     setHtml: (html) => myEditor.setHTML(html),
-  }
+  },
 );
 ```
 

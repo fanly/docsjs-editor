@@ -49,9 +49,7 @@ function App() {
 
   return (
     <div>
-      <button onClick={() => switchTo("quill", quillRef)}>
-        切换到 Quill
-      </button>
+      <button onClick={() => switchTo("quill", quillRef)}>切换到 Quill</button>
     </div>
   );
 }

@@ -10,17 +10,17 @@ This matrix describes practical integration coverage in `@coding01/docsjs-editor
 
 ## Matrix
 
-| Editor | Adapter Type | set/get HTML | Runtime Switch | docsjs Event Bridge | Notes |
-|---|---|---|---|---|---|
-| Tiptap | `tiptap` | Native | Yes | Yes | Uses `commands.setContent` + `getHTML` |
-| Quill | `quill` | Native | Yes | Yes | Uses `clipboard.dangerouslyPasteHTML` + `root.innerHTML` |
-| CKEditor5 | `ckeditor5` | Native | Yes | Yes | Uses `setData/getData` |
-| TinyMCE | `tinymce` | Native | Yes | Yes | Uses `setContent/getContent` |
-| Toast UI Editor | `toast-ui` | Native | Yes | Yes | Uses `setHTML/getHTML` |
-| WangEditor | `wangeditor` | Native | Yes | Yes | Uses `setHtml/getHtml` |
-| ProseMirror | `prosemirror` | Host hook | Yes | Yes | Provide host `setHtml/getHtml` bridge |
-| Lexical | `lexical` | Host hook | Yes | Yes | Provide host `setHtml/getHtml` bridge |
-| Slate | `slate` | Host hook | Yes | Yes | Provide host `setHtml/getHtml` bridge |
+| Editor          | Adapter Type  | set/get HTML | Runtime Switch | docsjs Event Bridge | Notes                                                    |
+| --------------- | ------------- | ------------ | -------------- | ------------------- | -------------------------------------------------------- |
+| Tiptap          | `tiptap`      | Native       | Yes            | Yes                 | Uses `commands.setContent` + `getHTML`                   |
+| Quill           | `quill`       | Native       | Yes            | Yes                 | Uses `clipboard.dangerouslyPasteHTML` + `root.innerHTML` |
+| CKEditor5       | `ckeditor5`   | Native       | Yes            | Yes                 | Uses `setData/getData`                                   |
+| TinyMCE         | `tinymce`     | Native       | Yes            | Yes                 | Uses `setContent/getContent`                             |
+| Toast UI Editor | `toast-ui`    | Native       | Yes            | Yes                 | Uses `setHTML/getHTML`                                   |
+| WangEditor      | `wangeditor`  | Native       | Yes            | Yes                 | Uses `setHtml/getHtml`                                   |
+| ProseMirror     | `prosemirror` | Host hook    | Yes            | Yes                 | Provide host `setHtml/getHtml` bridge                    |
+| Lexical         | `lexical`     | Host hook    | Yes            | Yes                 | Provide host `setHtml/getHtml` bridge                    |
+| Slate           | `slate`       | Host hook    | Yes            | Yes                 | Provide host `setHtml/getHtml` bridge                    |
 
 ## Production Recommendation
 

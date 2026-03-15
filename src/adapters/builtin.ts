@@ -1,4 +1,9 @@
-import type { AdapterContext, BuiltinEditorType, CreateAdapterOptions, EditorAdapter } from "../types";
+import type {
+  AdapterContext,
+  BuiltinEditorType,
+  CreateAdapterOptions,
+  EditorAdapter,
+} from "../types";
 
 export const BUILTIN_EDITOR_TYPES: BuiltinEditorType[] = [
   "tiptap",
@@ -9,13 +14,10 @@ export const BUILTIN_EDITOR_TYPES: BuiltinEditorType[] = [
   "wangeditor",
   "prosemirror",
   "lexical",
-  "slate"
+  "slate",
 ];
 
-function expectFunction<T>(
-  value: unknown,
-  label: string
-): T {
+function expectFunction<T>(value: unknown, label: string): T {
   if (typeof value !== "function") {
     throw new Error(`[docsjs-editor] Missing function: ${label}`);
   }
@@ -33,7 +35,7 @@ function getObject(obj: Record<string, unknown>, key: string): Record<string, un
 function createGenericAdapter(
   type: BuiltinEditorType | string,
   instance: Record<string, unknown>,
-  options: CreateAdapterOptions = {}
+  options: CreateAdapterOptions = {},
 ): EditorAdapter {
   const setContent = (instance as { setContent?: (value: string) => void }).setContent;
   const getContent = (instance as { getContent?: () => string }).getContent;
@@ -42,7 +44,7 @@ function createGenericAdapter(
     return {
       type,
       setHtml: (html: string) => setContent(html),
-      getHtml: () => getContent()
+      getHtml: () => getContent(),
     };
   }
 
@@ -53,7 +55,7 @@ function createGenericAdapter(
   return {
     type,
     setHtml: (html: string) => options.fallbackSetHtml?.(html),
-    getHtml: () => options.fallbackGetHtml?.() ?? ""
+    getHtml: () => options.fallbackGetHtml?.() ?? "",
   };
 }
 
@@ -61,7 +63,7 @@ function createTiptapAdapter(ctx: AdapterContext): EditorAdapter {
   const commands = getObject(ctx.instance, "commands");
   const setContent = expectFunction<(html: string, emitUpdate?: boolean) => void>(
     commands["setContent"],
-    "tiptap.commands.setContent"
+    "tiptap.commands.setContent",
   );
   const getHTML = expectFunction<() => string>(ctx.instance["getHTML"], "tiptap.getHTML");
 
@@ -72,7 +74,7 @@ function createTiptapAdapter(ctx: AdapterContext): EditorAdapter {
     focus: () => {
       const chain = (ctx.instance as { chain?: () => { focus: () => { run: () => void } } }).chain;
       chain?.().focus().run();
-    }
+    },
   };
 }
 
@@ -80,80 +82,98 @@ function createQuillAdapter(ctx: AdapterContext): EditorAdapter {
   const clipboard = getObject(ctx.instance, "clipboard");
   const paste = expectFunction<(html: string) => void>(
     clipboard["dangerouslyPasteHTML"],
-    "quill.clipboard.dangerouslyPasteHTML"
+    "quill.clipboard.dangerouslyPasteHTML",
   );
   const root = getObject(ctx.instance, "root");
 
   return {
     type: "quill",
     setHtml: (html: string) => paste(html),
-    getHtml: () => String(root["innerHTML"] ?? "")
+    getHtml: () => String(root["innerHTML"] ?? ""),
   };
 }
 
 function createCKEditor5Adapter(ctx: AdapterContext): EditorAdapter {
-  const setData = expectFunction<(html: string) => void>(ctx.instance["setData"], "ckeditor5.setData");
+  const setData = expectFunction<(html: string) => void>(
+    ctx.instance["setData"],
+    "ckeditor5.setData",
+  );
   const getData = expectFunction<() => string>(ctx.instance["getData"], "ckeditor5.getData");
 
   return {
     type: "ckeditor5",
     setHtml: (html: string) => setData(html),
-    getHtml: () => getData()
+    getHtml: () => getData(),
   };
 }
 
 function createTinyMCEAdapter(ctx: AdapterContext): EditorAdapter {
-  const setContent = expectFunction<(html: string) => void>(ctx.instance["setContent"], "tinymce.setContent");
+  const setContent = expectFunction<(html: string) => void>(
+    ctx.instance["setContent"],
+    "tinymce.setContent",
+  );
   const getContent = expectFunction<() => string>(ctx.instance["getContent"], "tinymce.getContent");
 
   return {
     type: "tinymce",
     setHtml: (html: string) => setContent(html),
-    getHtml: () => getContent()
+    getHtml: () => getContent(),
   };
 }
 
 function createToastUiAdapter(ctx: AdapterContext): EditorAdapter {
-  const setHTML = expectFunction<(html: string) => void>(ctx.instance["setHTML"], "toast-ui.setHTML");
+  const setHTML = expectFunction<(html: string) => void>(
+    ctx.instance["setHTML"],
+    "toast-ui.setHTML",
+  );
   const getHTML = expectFunction<() => string>(ctx.instance["getHTML"], "toast-ui.getHTML");
 
   return {
     type: "toast-ui",
     setHtml: (html: string) => setHTML(html),
-    getHtml: () => getHTML()
+    getHtml: () => getHTML(),
   };
 }
 
 function createWangEditorAdapter(ctx: AdapterContext): EditorAdapter {
-  const setHtml = expectFunction<(html: string) => void>(ctx.instance["setHtml"], "wangEditor.setHtml");
+  const setHtml = expectFunction<(html: string) => void>(
+    ctx.instance["setHtml"],
+    "wangEditor.setHtml",
+  );
   const getHtml = expectFunction<() => string>(ctx.instance["getHtml"], "wangEditor.getHtml");
 
   return {
     type: "wangeditor",
     setHtml: (html: string) => setHtml(html),
-    getHtml: () => getHtml()
+    getHtml: () => getHtml(),
   };
 }
 
 function createProseMirrorAdapter(ctx: AdapterContext): EditorAdapter {
-  const setHtml = expectFunction<(html: string) => void>(ctx.instance["setHtml"], "prosemirror.setHtml");
+  const setHtml = expectFunction<(html: string) => void>(
+    ctx.instance["setHtml"],
+    "prosemirror.setHtml",
+  );
   const getHtml = expectFunction<() => string>(ctx.instance["getHtml"], "prosemirror.getHtml");
 
   return {
     type: "prosemirror",
     setHtml,
-    getHtml
+    getHtml,
   };
 }
 
 function createLexicalAdapter(ctx: AdapterContext): EditorAdapter {
-  const setHtml = expectFunction<(html: string) => void>(ctx.instance["setHtml"], "lexical.setHtml");
+  const setHtml = expectFunction<(html: string) => void>(
+    ctx.instance["setHtml"],
+    "lexical.setHtml",
+  );
   const getHtml = expectFunction<() => string>(ctx.instance["getHtml"], "lexical.getHtml");
 
   return {
     type: "lexical",
     setHtml,
-    getHtml
+    getHtml,
   };
 }
 
@@ -164,13 +184,13 @@ function createSlateAdapter(ctx: AdapterContext): EditorAdapter {
   return {
     type: "slate",
     setHtml,
-    getHtml
+    getHtml,
   };
 }
 
 export function createBuiltinAdapter(
   ctx: AdapterContext,
-  options: CreateAdapterOptions = {}
+  options: CreateAdapterOptions = {},
 ): EditorAdapter {
   switch (ctx.type) {
     case "tiptap":

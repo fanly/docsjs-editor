@@ -12,7 +12,7 @@ interface DocsjsHost {
 
 export async function importHtmlSnapshotToEditor(
   htmlSnapshot: string,
-  adapter: EditorAdapter
+  adapter: EditorAdapter,
 ): Promise<void> {
   await adapter.setHtml(htmlSnapshot);
 }
@@ -20,12 +20,12 @@ export async function importHtmlSnapshotToEditor(
 export async function importDocxToEditor(
   file: File,
   adapter: EditorAdapter,
-  options: DocsjsImportOptions = {}
+  options: DocsjsImportOptions = {},
 ): Promise<string> {
   void options;
   const result = await parseDocxToHtmlSnapshot(file);
   const payload = result as string | { htmlSnapshot?: string };
-  const html = typeof payload === "string" ? payload : payload.htmlSnapshot ?? "";
+  const html = typeof payload === "string" ? payload : (payload.htmlSnapshot ?? "");
   await adapter.setHtml(html);
   return html;
 }

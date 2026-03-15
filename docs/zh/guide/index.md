@@ -5,6 +5,7 @@
 ## 什么是 DocsJS Editor？
 
 DocsJS Editor 是一个多编辑器集成桥接器，可以：
+
 - 使用统一 API 连接多个富文本编辑器
 - 运行时在编辑器之间切换，同时保留内容
 - 将 DocsJS HTML 快照无缝集成到任何编辑器
