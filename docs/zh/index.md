@@ -3,74 +3,95 @@ layout: home
 
 hero:
   name: DocsJS Editor
-  text: 多编辑器集成桥接
-  tagline: 在 Tiptap、Quill、CKEditor 等编辑器之间运行时切换。无缝集成 DocsJS 工作流。
+  text: 主流编辑器的统一桥接
+  tagline: 在主流编辑器间运行统一的 docsjs 内容流，运行时切换提供商，保持业务 API 不变。
   image:
     src: /logo.svg
     alt: DocsJS Editor Logo
   actions:
     - theme: brand
-      text: 开始使用
-      link: /zh/guide/
-    - theme: alt
-      text: GitHub
-      link: https://github.com/fanly/docsjs-editor
-    - theme: alt
-      text: npm 包
+      text: 获取包
       link: https://www.npmjs.com/package/@coding01/docsjs-editor
+    - theme: brand
+      text: 配合 docsjs 使用
+      link: https://docsjs.coding01.cn
+    - theme: alt
+      text: 查看案例
+      link: #showcase
 
 features:
-  - icon: 🔄
-    title: 运行时切换
-    details: 在 Tiptap、Quill、CKEditor 等编辑器之间运行时切换，同时保留内容。
-  - icon: 🎯
-    title: 统一 API
-    details: 单一接口适配所有支持的编辑器，无需学习不同的 API。
-  - icon: 🔗
-    title: DocsJS 集成
-    details: 将 DocsJS HTML 快照无缝导入任何支持的编辑器。
-  - icon: ⚡
-    title: 轻量级
-    details: Tree-shakeable，最小包体积 (~7KB gzipped)。
-  - icon: 🧩
-    title: 可扩展
-    details: 通过适配器系统轻松添加对新编辑器的支持。
-  - icon: 🏗️
-    title: 框架就绪
-    details: 一流的 React、Vue 和原生 JavaScript 支持。
+  - title: 主流覆盖
+    details: 内置适配器优先覆盖主流编辑器，为 Lexical、Slate 和 ProseMirror 栈提供可扩展钩子。
+  - title: 运行时切换
+    details: 运行时切换编辑器提供商，同时保留内容并避免集成重写。
+  - title: docsjs 原生桥接
+    details: 将 docsjs 快照直接连接到目标编辑器，使导入和编辑保持在一条技术路径上。
+  - title: 生态配对
+    details: 与 docsjs 配对作为规范源，在多个编辑器提供商间保持一个内容流一致。
 ---
 
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-value">8+</div>
-    <div class="stat-label">支持的编辑器</div>
+    <div class="stat-value">9</div>
+    <div class="stat-label">主流编辑器</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">v0.1.2</div>
-    <div class="stat-label">当前版本</div>
+    <div class="stat-value">1</div>
+    <div class="stat-label">业务 API</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">~7KB</div>
-    <div class="stat-label">包体积</div>
+    <div class="stat-value">运行时</div>
+    <div class="stat-label">提供商切换</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">3</div>
-    <div class="stat-label">框架适配器</div>
+    <div class="stat-value">MIT</div>
+    <div class="stat-label">开源</div>
   </div>
 </div>
 
-## 支持的编辑器
+## 为什么选择 docsjs-editor？
 
-| 编辑器 | 状态 | 备注 |
-|--------|------|------|
-| Tiptap | ✅ 完全支持 | 与 DocsJS 最佳体验 |
-| Quill | ✅ 完全支持 | 富文本编辑 |
-| CKEditor 5 | ✅ 完全支持 | 企业级 |
-| TinyMCE | ✅ 完全支持 | 云端和自托管 |
-| Toast UI | ✅ 完全支持 | 韩国编辑器 |
-| WangEditor | ✅ 完全支持 | 中国编辑器 |
-| ProseMirror | 🔄 通过钩子 | 底层实现 |
-| Lexical | 🔄 通过钩子 | Facebook 编辑器 |
+- **主流覆盖**：内置适配器优先覆盖主流编辑器，为 Lexical、Slate 和 ProseMirror 栈提供可扩展钩子。
+- **运行时切换**：运行时切换编辑器提供商，同时保留内容并避免集成重写。
+- **docsjs 原生桥接**：将 docsjs 快照直接连接到目标编辑器，使导入和编辑保持在一条技术路径上。
+- **生态配对**：与 docsjs 配对作为规范源，在多个编辑器提供商间保持一个内容流一致。
+
+## 框架快速开始
+
+- **React**：运行时切换演示，一个 docsjs 内容源和两个编辑器提供商。[打开 React 演示](https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html)
+- **Vue**：Vue 状态驱动的提供商切换，保持一致的内容行为。[打开 Vue 演示](https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html)
+- **原生 / CDN**：5 编辑器面板，在提交技术栈之前基准测试集成工作量。[打开 5 编辑器演示](https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html)
+
+## 完整案例
+
+```ts
+import { EditorSwitchboard } from "@coding01/docsjs-editor";
+
+const switchboard = new EditorSwitchboard();
+switchboard.connect("tiptap", tiptapEditor);
+switchboard.connect("quill", quillEditor);
+switchboard.connect("ckeditor5", ckEditor);
+
+const canonicalHtml = docsjsElement.getSnapshot();
+
+await switchboard.switchTo("tiptap");
+await switchboard.setHtml(canonicalHtml);
+
+await switchboard.switchTo("quill");
+await switchboard.setHtml(canonicalHtml);
+```
+
+## API 参考
+
+- **切换板**：connect() / switchTo() / setHtml() / getHtml()
+- **docsjs 桥接**：bindDocsjsChangeToEditor() / importDocxToEditor()
+- **适配器**：createBuiltinAdapter() 支持主流编辑器类型
+
+## 推荐生态路径
+
+使用 docsjs 进行高保真导入，docsjs-editor 进行运行时编辑器切换，docsjs-markdown 进行最终 Markdown 交付。
+
+**@coding01/docsjs** → **@coding01/docsjs-editor** → **@coding01/docsjs-markdown**
 
 ## 快速开始
 
@@ -109,26 +130,9 @@ await switchboard.setHtml("<h1>你好</h1><p>世界</p>");
 await switchboard.switchTo("quill", quillEditor);
 ```
 
-## 生态
+## 生态系统
 
-<div class="feature-grid">
-  <div class="feature-card">
-    <h3>📄 DocsJS</h3>
-    <p>高保真 Word/DOCX 导入。用作 HTML 快照来源。</p>
-    <a href="https://docsjs.coding01.cn">查看文档 →</a>
-  </div>
-  <div class="feature-card">
-    <h3>📝 DocsJS Markdown</h3>
-    <p>将 DocsJS HTML 转换为 Markdown。适用于知识库。</p>
-    <a href="https://markdown.docsjs.coding01.cn">查看文档 →</a>
-  </div>
-</div>
-
-## 技术栈
-
-<div class="stats-bar" style="opacity: 0.7; font-size: 14px;">
-  <span>React</span>
-  <span>Vue</span>
-  <span>TypeScript</span>
-  <span>Vite+</span>
-</div>
+| 包 | 描述 |
+|---------|-------------|
+| [DocsJS](https://docsjs.coding01.cn) | 高保真 Word/DOCX 导入 |
+| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown 输出转换 |

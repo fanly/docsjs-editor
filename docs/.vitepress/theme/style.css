@@ -1,9 +1,31 @@
 :root {
   --docsjs-brand: #0d74ce;
   --vp-c-brand-1: #0d74ce;
-  --vp-c-brand-2: #0b5ca2;
-  --vp-c-brand-3: #094a82;
+  --vp-c-brand-2: #0a5ca8;
+  --vp-c-brand-3: #074682;
+  --vp-c-brand: #0d74ce;
   --vp-c-brand-soft: rgba(13, 116, 206, 0.14);
+  --vp-c-brand-1-light: #2d8de0;
+  --vp-c-brand-1-dark: #0a5ca8;
+  --vp-c-brand-2-light: #0d74ce;
+  --vp-c-brand-2-dark: #074682;
+  --vp-c-brand-3-light: #0a5ca8;
+  --vp-c-brand-3-dark: #05365c;
+}
+
+html:not(.dark),
+html:where(:not(.dark)) {
+  --vp-c-brand-1: #0d74ce;
+  --vp-c-brand-2: #0a5ca8;
+  --vp-c-brand-3: #074682;
+  --vp-c-brand: #0d74ce;
+}
+
+html.dark {
+  --vp-c-brand-1: #2d8de0;
+  --vp-c-brand-2: #0d74ce;
+  --vp-c-brand-3: #0a5ca8;
+  --vp-c-brand: #2d8de0;
 }
 
 .vp-doc h1 {

@@ -8,7 +8,7 @@ export default defineConfig({
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
     ["link", { href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap", rel: "stylesheet" }],
-    ["meta", { name: "theme-color", content: "#0e8b78" }],
+    ["meta", { name: "theme-color", content: "#0d74ce" }],
   ],
   locales: {
     root: {
@@ -23,7 +23,7 @@ export default defineConfig({
           { text: "Examples", link: "/examples/", activeMatch: "/examples/" },
           { text: "v0.1.2", link: "https://www.npmjs.com/package/@coding01/docsjs-editor" },
           { text: "DocsJS ↗", link: "https://docsjs.coding01.cn" },
-          { text: "Markdown ↗", link: "https://markdown.docsjs.coding01.cn" },
+          { text: "Markdown ↗", link: "https://fanly.github.io/docsjs-markdown/" },
         ],
         sidebar: {
           "/guide/": [
@@ -72,7 +72,7 @@ export default defineConfig({
           { text: "示例", link: "/zh/examples/", activeMatch: "/zh/examples/" },
           { text: "v0.1.2", link: "https://www.npmjs.com/package/@coding01/docsjs-editor" },
           { text: "DocsJS ↗", link: "https://docsjs.coding01.cn" },
-          { text: "Markdown ↗", link: "https://markdown.docsjs.coding01.cn" },
+          { text: "Markdown ↗", link: "https://fanly.github.io/docsjs-markdown/" },
         ],
         sidebar: {
           "/zh/guide/": [
