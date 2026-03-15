@@ -1,0 +1,14 @@
+{
+  "name": "@coding01/docsjs-editor-docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build .",
+    "preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.16",
+    "vite": "^6.0.0"
+  }
+}
