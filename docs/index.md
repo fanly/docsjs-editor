@@ -22,19 +22,14 @@ hero:
 features:
   - title: Mainstream Coverage
     details: Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.
-    icon: 🌐
   - title: Switchboard Runtime
     details: Switch editor providers at runtime while preserving content and avoiding integration rewrites.
-    icon: 🔄
   - title: docsjs Native Bridge
     details: Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.
-    icon: 🔗
   - title: Ecosystem Pairing
     details: Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.
-    icon: 🌿
-  - title: Demo & Matrix Ready
+  - title: Demo and Matrix Ready
     details: Use demos and capability matrix to choose editor stacks faster and reduce migration risk.
-    icon: 🗺️
 ---
 
 <div class="stats-bar">
@@ -58,59 +53,22 @@ features:
 
 ## Why docsjs-editor?
 
-<div class="features-grid">
-  <div class="feature-card">
-    <div class="feature-icon">🌐</div>
-    <h3>Mainstream Coverage</h3>
-    <p>Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🔄</div>
-    <h3>Switchboard Runtime</h3>
-    <p>Switch editor providers at runtime while preserving content and avoiding integration rewrites.</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🔗</div>
-    <h3>docsjs Native Bridge</h3>
-    <p>Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🌿</div>
-    <h3>Ecosystem Pairing</h3>
-    <p>Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.</p>
-  </div>
-  <div class="feature-card">
-    <div class="feature-icon">🗺️</div>
-    <h3>Demo & Matrix Ready</h3>
-    <p>Use demos and capability matrix to choose editor stacks faster and reduce migration risk.</p>
-  </div>
-</div>
+- **Mainstream Coverage**: Built-in adapters cover mainstream editors first, with extensible hooks for Lexical, Slate, and ProseMirror stacks.
+- **Switchboard Runtime**: Switch editor providers at runtime while preserving content and avoiding integration rewrites.
+- **docsjs Native Bridge**: Connect docsjs snapshots directly into target editors so import and editing stay in one technical path.
+- **Ecosystem Pairing**: Pair with docsjs as a canonical source and keep one content stream consistent across multiple editor providers.
+- **Demo and Matrix Ready**: Use demos and capability matrix to choose editor stacks faster and reduce migration risk.
 
 ## Framework Quick Start
 
-<div class="framework-grid">
-  <div class="framework-card">
-    <h3>React</h3>
-    <p>Runtime switch demo with one docsjs content source and two editor providers.</p>
-    <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html">Open React demo →</a>
-  </div>
-  <div class="framework-card">
-    <h3>Vue</h3>
-    <p>Vue state-driven provider switching with consistent content behavior.</p>
-    <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html">Open Vue demo →</a>
-  </div>
-  <div class="framework-card">
-    <h3>Vanilla / CDN</h3>
-    <p>5-editor panel to benchmark integration effort before committing a stack.</p>
-    <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html">Open 5-editor demo →</a>
-  </div>
-</div>
+- **React**: Runtime switch demo with one docsjs content source and two editor providers. [Open React demo](https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html)
+- **Vue**: Vue state-driven provider switching with consistent content behavior. [Open Vue demo](https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html)
+- **Vanilla / CDN**: 5-editor panel to benchmark integration effort before committing a stack. [Open 5-editor demo](https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html)
 
-## Complete Case: One content, multiple editor adapters
+## Complete Case
 
-<div class="showcase">
-  <div class="showcase-code">
-<pre><code class="language-ts">import { EditorSwitchboard } from "@coding01/docsjs-editor";
+```ts
+import { EditorSwitchboard } from "@coding01/docsjs-editor";
 
 const switchboard = new EditorSwitchboard();
 switchboard.connect("tiptap", tiptapEditor);
@@ -126,87 +84,51 @@ await switchboard.switchTo("quill");
 await switchboard.setHtml(canonicalHtml);
 
 await switchboard.switchTo("ckeditor5");
-await switchboard.setHtml(canonicalHtml);</code></pre>
-  </div>
-  <div class="showcase-panels">
-    <div class="showcase-panel">
-      <div class="panel-label">Left: docsjs HTML snapshot</div>
-      <pre><code class="language-html"><h1>Quarter Plan</h1>
+await switchboard.setHtml(canonicalHtml);
+```
+
+**Left: docsjs HTML snapshot**
+```
+<h1>Quarter Plan</h1>
 <p>One source content rendered across multiple editor engines.</p>
 <ul>
   <li>DOCX fidelity import</li>
   <li>Editor runtime switch</li>
   <li>Content parity checks</li>
-</ul></code></pre>
-    </div>
-    <div class="showcase-panel">
-      <div class="panel-label">Right: same content after adapter switch</div>
-      <pre><code class="language-json">{
+</ul>
+```
+
+**Right: same content after adapter switch**
+```
+{
   "activeEditor": "quill",
   "source": "docsjs snapshot",
   "sameHeading": true,
   "sameListCount": 3,
   "parityCheck": "pass",
   "preview": "Quarter Plan | DOCX fidelity import | Editor runtime switch | Content parity checks"
-}</code></pre>
-    </div>
-  </div>
-</div>
+}
+```
 
 ## API Reference
 
-<div class="api-grid">
-  <div class="api-card">
-    <h3>Switchboard</h3>
-    <p><code>connect()</code> / <code>switchTo()</code> / <code>setHtml()</code> / <code>getHtml()</code></p>
-  </div>
-  <div class="api-card">
-    <h3>docsjs Bridge</h3>
-    <p><code>bindDocsjsChangeToEditor()</code> / <code>importDocxToEditor()</code></p>
-  </div>
-  <div class="api-card">
-    <h3>Adapters</h3>
-    <p><code>createBuiltinAdapter()</code> with mainstream editor types</p>
-  </div>
-</div>
+- **Switchboard**: connect() / switchTo() / setHtml() / getHtml()
+- **docsjs Bridge**: bindDocsjsChangeToEditor() / importDocxToEditor()
+- **Adapters**: createBuiltinAdapter() with mainstream editor types
 
 ## Engineering Trust Signals
 
-<div class="trust-grid">
-  <div class="trust-card">
-    <h3>CI</h3>
-    <p>Push to main: run verify quality gate.</p>
-  </div>
-  <div class="trust-card">
-    <h3>npm</h3>
-    <p>Push tag v*.*.*: publish npm package.</p>
-  </div>
-  <div class="trust-card">
-    <h3>Pages</h3>
-    <p>Update docs/** on main: deploy landing page.</p>
-  </div>
-</div>
+- **CI**: Push to main: run verify quality gate.
+- **npm**: Push tag v*.*.*: publish npm package.
+- **Pages**: Update docs/** on main: deploy landing page.
 
 ## Recommended Ecosystem Path
 
-<p>Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.</p>
+Use docsjs for fidelity import, docsjs-editor for runtime editor switching, and docsjs-markdown for final markdown delivery.
 
-<div class="ecosystem-flow">
-  <span class="eco-badge">@coding01/docsjs</span>
-  <span class="eco-arrow">→</span>
-  <span class="eco-badge">@coding01/docsjs-editor</span>
-  <span class="eco-arrow">→</span>
-  <span class="eco-badge">@coding01/docsjs-markdown</span>
-</div>
-<div class="ecosystem-label">Theme Switchable</div>
+**@coding01/docsjs** → **@coding01/docsjs-editor** → **@coding01/docsjs-markdown**
 
-<div class="demo-links">
-  <a href="https://github.com/fanly/docsjs-editor/tree/main/demos">Open demos</a> ·
-  <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html">Try 5-editor demo</a> ·
-  <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html">React demo</a> ·
-  <a href="https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html">Vue demo</a> ·
-  <a href="https://github.com/fanly/docsjs-editor/blob/main/docs/EDITOR_CAPABILITY_MATRIX.md">Open capability matrix</a>
-</div>
+[Open demos](https://github.com/fanly/docsjs-editor/tree/main/demos) · [Try 5-editor demo](https://github.com/fanly/docsjs-editor/blob/main/demos/multi-switch.html) · [React demo](https://github.com/fanly/docsjs-editor/blob/main/demos/react-demo/index.html) · [Vue demo](https://github.com/fanly/docsjs-editor/blob/main/demos/vue-demo/index.html) · [Open capability matrix](https://github.com/fanly/docsjs-editor/blob/main/docs/EDITOR_CAPABILITY_MATRIX.md)
 
 ## Quick Start
 
@@ -247,10 +169,10 @@ await switchboard.switchTo("quill", quillEditor);
 
 ## Ecosystem
 
-| Package                                            | Description                    |
-| -------------------------------------------------- | ------------------------------ |
-| [DocsJS](https://docsjs.coding01.cn)               | High-fidelity Word/DOCX import |
-| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown output conversion     |
+| Package | Description |
+|---------|-------------|
+| [DocsJS](https://docsjs.coding01.cn) | High-fidelity Word/DOCX import |
+| [DocsJS Markdown](https://fanly.github.io/docsjs-markdown/) | Markdown output conversion |
 
 ## Sponsors
 
